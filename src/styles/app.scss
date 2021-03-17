@@ -15,6 +15,8 @@
 @import './components/_map';
 @import './components/_tiles';
 @import './components/_padding';
+@import './components/_tablet';
+
 
 @import './components/_button';
 @import './components/_icon';
@@ -22,4 +24,12 @@
 
 #app{
     min-height: 100vh;
+    background-color: $color-white;   
+}
+.fade-enter, .fade-leave-to{
+    transform: scale(.98);
+    opacity: 0;
+}
+.fade-enter-active, .fade-leave-active{
+    transition: all .1s ease;
 }

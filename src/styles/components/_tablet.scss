@@ -1,0 +1,70 @@
+.tablet{
+    position: relative;
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: $color-light_green;
+    color: $color-white;
+
+    &:before, &:after{
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        z-index: 0;
+    }
+    &:before{
+        left: -5px;
+        bottom: -10px;
+        width: 75px;
+        height: 75px;
+        background: rgba($color-white, .1);
+    }
+    &:after{
+        right: 20px;
+        top: -45px;
+        width: 125px;
+        height: 125px;
+        background: rgba($color-dark_green, .1);
+    }
+
+    &__title{
+        position: relative;
+        z-index: 1;
+    }
+
+    &__content{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        z-index: 1;
+    }
+
+    &__description{
+        position: relative;
+        display: flex;
+        margin: .5rem 0;
+        max-height: calc(3 * calc(15px * 1.5));
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:after{
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: calc(1.5 * 15px);
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to left, $color-light_green 15%, rgba($color-light_green,0));
+        }
+    }
+
+    &__button{
+        width: auto;
+        flex-shrink: 0;
+        margin-top: auto;
+        background-color: $color-white;
+        z-index: 1;
+        @include shadow;
+    }
+}

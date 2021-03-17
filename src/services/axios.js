@@ -1,11 +1,15 @@
 import axios from "axios";
 import {
-    cacheAdapterEnhancer
-} from "axios-extensions";
+    setupCache
+} from "axios-cache-adapter";
+
+const cache = setupCache({
+	maxAge: 0.1 * 60 * 1000
+})
 
 export const http = axios.create({
-    baseURL: 'http://localhost:3000',
-	/*headers: { 'Cache-Control': 'no-cache'},
+    baseURL: 'https://ourzoo.eu',
+	//headers: { 'Cache-Control': 'no-cache'},
 	// cache will be enabled by default
-	adapter: cacheAdapterEnhancer(axios.defaults.adapter)*/
+	//adapter: cache.adapter
 });

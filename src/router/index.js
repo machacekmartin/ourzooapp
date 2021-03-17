@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from "@/store";
+
 import Home from '../views/Home.vue'
 import Intro from '../views/Intro.vue'
+
+import ZooHome from '../views/ZooHome.vue'
 
 Vue.use(VueRouter)
 
@@ -9,12 +13,21 @@ const routes = [
     {
         path: '/',
         name: 'Intro',
-        component: Intro
+        component: Intro,
+        
     },
     {
         path: '/home',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/zoo/:id/home',
+        name: 'Zoo Home',
+        component: ZooHome,
+        meta: {
+            activeZooNeeded: true,
+        }
     },
     {
         path: '/about',
@@ -35,5 +48,7 @@ const routes = [
 const router = new VueRouter({
     routes
 })
+
+
 
 export default router
