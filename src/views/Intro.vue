@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div class="page page--full">
         <div class="intro">
             <div class="intro__panel" :style="'transform: translateX('+currentPosition+'%)'">
                 <div class="intro__block">
@@ -25,7 +25,7 @@
                         <div class="intro__content__header">
                             <h3>Doporučená nastavení</h3>
                         </div>
-                        <p>Pro maximální zážitek je doporučeno povolit <span
+                        <p>Pro maximální zážitek (např interaktivní mapa a řazení dle vzdálenosti) je nutné povolit <span
                                 class="intro__highlight intro__highlight--lblue">sdílení aktuální polohy</span></p>
                     </div>
                     <div class="intro__controls">
@@ -62,12 +62,16 @@
                 this.currentPosition += 100;
             },
             letsgo() {
-                cordova.plugins.permissions.checkPermission(cordova.plugins.permissions.ACCESS_FINE_LOCATION, device => {
-                    if (!device.hasPermission){
-                        cordova.plugins.permissions.requestPermission(cordova.plugins.permissions.ACCESS_FINE_LOCATION, (succ) => {}, (err) => {});
-                    }
-                });
+                localStorage.setItem('introPassed', true);
+                alert("Dám tě na homepage s přehledem všech zoo");
+                this.$router.push('Home');
             },
+        },
+        beforeCreate(){
+            if (localStorage.getItem('introPassed')){
+                alert("Už tady byls");
+                this.$router.push('Home');
+            }
         },
     }
 </script>
