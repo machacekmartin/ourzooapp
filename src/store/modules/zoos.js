@@ -9,7 +9,6 @@ const getters = {
 const actions = {
     async LoadZoos({ commit }) {
         const zoos = (await http.get("/api/zoos")).data;
-
         commit("setZoos", zoos);
     },
 };
