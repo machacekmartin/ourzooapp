@@ -1,0 +1,61 @@
+.horizontal-slider{
+    display: flex;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: auto;
+
+    &__panel{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 215px;
+        height: 200px;
+        margin-left: .5rem;
+        overflow: hidden;
+
+        &:first-child{
+            margin-left: 1rem;
+        }
+    }
+
+    &__image{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        border-radius: 1rem;
+        @include transition;
+    }
+
+    &__content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: auto .5rem .5rem;
+        padding: .8rem 1rem;
+        border-radius: .8rem;
+        z-index: 1;
+        font-weight: 600;
+        @include glass;
+    }
+
+    &__text{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__icon{
+        width: 14px;
+        height: 14px;
+        fill: $color-dark_gray;
+    }
+}

@@ -1,5 +1,5 @@
 <template>
-    <div class="page padding--h">
+    <div class="page margin--h">
         <h1 class="page__title">Zoo v této aplikaci</h1>
         <div class="tiles tiles--huge">
             <router-link :to="{ name: 'Zoo Home', params: { id: zoo._id } }" v-for="zoo in zoos" :key="zoo._id" class="tiles__item">
@@ -19,18 +19,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
     name: 'Home',
-    components: {
-        HelloWorld
-    },
-    data(){
-        return {
-
-        }
-    },
     computed: {
         ...mapGetters('zoos', ['zoos'])
     },

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from "@/store";
 
 import Home from '../views/Home.vue'
 import Intro from '../views/Intro.vue'
@@ -37,8 +36,8 @@ const routes = [
         }
     },
     {
-        path: '/map',
-        name: 'Map',
+        path: '/zoo/:id/map',
+        name: 'Zoo Map',
         component: function () {
             return import( /* webpackChunkName: "about" */ '../views/Map.vue')
         }

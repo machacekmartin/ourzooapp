@@ -1,0 +1,19 @@
+.widget{
+    display: flex;
+    flex-direction: column;
+    &__header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__icon{
+        width: 28px;
+        height: 28px;
+        fill: $color-gray;
+
+        &:hover, &:active{
+            background: yellow;
+            fill: $color-dark_green;
+        }
+    }
+}

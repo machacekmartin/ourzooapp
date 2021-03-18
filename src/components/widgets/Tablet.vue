@@ -1,5 +1,5 @@
 <template>
-    <div class="announcement tablet padding--h">
+    <div class="announcement tablet">
         <h3 class="tablet__title">{{ data.name }}</h3>
         <div class="tablet__content">
             <div class="tablet__text">
@@ -19,13 +19,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 export default {
-    name: 'AnnouncementWidget',
+    name: 'TabletWidget',
     props: ['data'],
-    data(){
-        return{
-
-        }
-    },
     computed: {
         date(){
             let date = this.data.datetime.split(' ')[0];
@@ -35,13 +30,6 @@ export default {
         time(){
             return this.data.datetime.split(' ')[1];
         }
-        
     },
-    methods: {
-    },
-
-    async created(){
-
-    }
 }
 </script>

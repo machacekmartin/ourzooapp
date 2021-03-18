@@ -1,10 +1,49 @@
 .padding{
-    &-v{
-        padding-top: .8rem;
-        padding-bottom: .8rem;
+    &--t{
+        padding-top: 1.5rem;
+    }
+    &--b{
+        padding-bottom: 1.5rem;
+    }
+    &--l{
+        padding-left: 1.5rem;
+    }
+    &--r{
+        padding-right: 1.5rem;
+    }
+
+    &--v{
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
     &--h{
-        padding-left: .8rem;
-        padding-right: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    &--sm-t{
+        padding-top: .5rem;
+    }
+    &--sm-b{
+        padding-bottom: .5rem;
+    }
+    &--sm-l{
+        padding-left: .5rem;
+    }
+    &--sm-r{
+        padding-right: .5rem;
+    }
+
+    &--lg-t{
+        padding-top: 3rem;
+    }
+    &--lg-b{
+        padding-bottom: 3rem;
+    }
+    &--lg-l{
+        padding-left: 3rem;
+    }
+    &--lg-r{
+        padding-right: 3rem;
     }
 }

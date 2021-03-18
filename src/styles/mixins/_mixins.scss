@@ -1,4 +1,4 @@
-@mixin glass($color: white, $opacity: 0.85, $blur: .5rem){
+@mixin glass($color: white, $opacity: 0.75, $blur: .5rem){
     background-color: rgba($color, $opacity);
     backdrop-filter: blur($blur);
 }

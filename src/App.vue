@@ -8,6 +8,7 @@
 </template>
 <script>
 import Nav from '@/components/Nav.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -15,8 +16,20 @@ export default {
     },
     data() {
         return {
-            ready: false,
         }
+    },
+    methods: {
+        ...mapActions('location', ['UpdateLocation']),
+    },
+    computed: {
+        ...mapGetters('location', ['location'])
+    },
+    created(){
+        document.addEventListener('deviceready', (success) => {
+            navigator.geolocation.watchPosition(succ => {
+                this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
+            }, err => {}, { enableHighAccuracy: true });
+        })
     }
 }
 </script>
