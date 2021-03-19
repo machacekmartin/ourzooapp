@@ -1,0 +1,43 @@
+.list{
+    display: flex;
+    flex-direction: column;
+
+    &__item{
+        display: flex;
+        align-items: center;
+        margin-bottom: .5rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: $color-light_gray;
+        @include transition;
+
+        &:hover{
+            background-color: $color-gray;
+        }
+    }
+
+    &__image{
+        flex-shrink: 0;
+        width: 85px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 1rem;   
+    }
+
+    &__content{
+        padding: 0 1.5rem;
+    }
+
+    &__text{
+        max-height: calc(2 * calc(15px * 1.5));
+        overflow: hidden;
+    }
+
+    &__button{
+        flex-shrink: 0;
+        height: 14px;
+        width: 14px;
+        margin: 0 1rem 0 auto;
+    }
+}
+

@@ -1,0 +1,12 @@
+.text-link{
+    display: flex;
+    justify-content: center;
+    color: $color-light_green;
+    text-decoration: underline;
+    text-align: center;
+    @include transition;
+
+    &:hover{
+        color: $color-dark_green;
+    }
+}

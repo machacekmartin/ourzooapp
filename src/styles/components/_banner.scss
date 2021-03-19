@@ -1,4 +1,5 @@
 .banner{
+    $self: &;
     position: relative;
     display: flex;
     align-items: center;
@@ -7,6 +8,12 @@
     border-radius: 1rem;
     overflow: hidden;
     transform: translateZ(0);
+
+    &:hover{
+        #{ $self }__button{
+            @include glass($color-dark_green);
+        }
+    }
 
     &__background{
         position: absolute;
@@ -29,10 +36,11 @@
         width: calc(100% - 3.5rem);
         margin: 0 auto;
         padding: 1rem 1.5rem;
-        
         z-index: 1;
         border-radius: 1rem;
+
         @include glass($color-dark_gray);
+        @include transition;
     }
 
     &__text{
