@@ -1,6 +1,5 @@
 <template>
-    <div class="page margin--b" v-if="zoo">
-        <router-link to="/home">awdawd</router-link>
+    <div class="page margin--b" v-if="zoo && species && expositions && latestAnnouncement">
         <h1>{{ zoo.name }}</h1>
         <div class="widget margin--t margin--h">
             <div class="widget__header margin--sm-b">
@@ -12,9 +11,9 @@
             <div class="widget__header margin--h margin--sm-b">
                 <h3>Nejbližší zvířata v této zoo</h3>
             </div>
-            <horizontal-slider-widget v-if="species" :data="limitedSpecies"></horizontal-slider-widget>
+            <horizontal-slider-widget v-if="limitedSpecies" :data="limitedSpecies"></horizontal-slider-widget>
         </div>
-        <router-link to="/" class="text-link margin--t">
+        <router-link :to="{ name: 'Zoo Species', params: { id: zoo._id } }" class="text-link margin--t">
             <h3>Všechna zvířata</h3>
         </router-link>
         
@@ -26,7 +25,7 @@
             <div class="widget__header margin--sm-b">
                 <h3>Nejbližší expozice</h3>
             </div>
-            <list-widget :items="expositions"></list-widget>
+            <list-widget :items="limitedExpositions"></list-widget>
         </div>
     </div>
 </template>
@@ -54,15 +53,15 @@ export default {
     computed: {
         ...mapGetters('zoos', ['zoo']),
         ...mapGetters('announcements', ['latestAnnouncement']),
-        ...mapGetters('species', ['species', 'speciesWithDistance']),
-        ...mapGetters('expositions', ['expositions']),
+        ...mapGetters('species', ['species', 'speciesSortedByDistance']),
+        ...mapGetters('expositions', ['expositions', 'expositionsSortedByDistance']),
         ...mapGetters('location', ['location']),
 
         limitedSpecies(){
-            if (this.location){
-                return this.speciesWithDistance;
-            }
-            return this.species;
+            return this.speciesSortedByDistance.slice(0, 5);
+        },
+        limitedExpositions(){
+            return this.expositionsSortedByDistance.slice(0,5);
         }
     },
     methods: {

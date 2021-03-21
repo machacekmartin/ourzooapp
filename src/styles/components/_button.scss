@@ -9,22 +9,26 @@
     cursor: pointer;
     @include transition;
 
-    /*&:hover{
+    &:hover{
         background-color: $color-dark_gray;
-    }*/
+    }
 
     &--lgreen{
-        background: $color-light_green;
+        background-color: $color-light_green;
         fill: $color-white;
     }
 
     &--lblue{
         fill: $color-white;
-        background: $color-light_blue;
+        background-color: $color-light_blue;
     }
 
     &--dgreen{
         fill: $color-white;
-        background: $color-dark_green;
+        background-color: $color-dark_green;
+    }
+
+    &--texticon{
+        justify-content: space-between;
     }
 }

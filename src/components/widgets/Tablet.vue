@@ -1,5 +1,5 @@
 <template>
-    <div class="announcement tablet">
+    <div class="announcement tablet" v-if="data">
         <h3 class="tablet__title">{{ data.name }}</h3>
         <div class="tablet__content">
             <div class="tablet__text">
@@ -12,10 +12,8 @@
                 <icon icon="announcements"></icon>
             </router-link>
         </div>
-        
     </div>
 </template>
-
 <script>
 import { mapActions, mapGetters } from 'vuex';
 export default {

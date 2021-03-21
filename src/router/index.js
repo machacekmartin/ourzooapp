@@ -42,6 +42,20 @@ const routes = [
             return import( /* webpackChunkName: "about" */ '../views/Map.vue')
         }
     },
+    {
+        path: '/zoo/:id/species',
+        name: 'Zoo Species',
+        component: function () {
+            return import( /* webpackChunkName: "about" */ '../views/ZooSpecies.vue')
+        }
+    },
+    {
+        path: '/zoo/:id/species/:detailId',
+        name: 'Zoo One Species',
+        component: function () {
+            return import( /* webpackChunkName: "about" */ '../views/ZooOneSpecies.vue')
+        }
+    },
 ]
 
 const router = new VueRouter({

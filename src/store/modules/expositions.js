@@ -1,13 +1,26 @@
 import { http } from "@/services/axios";
+import { assignDistances } from "@/services/distance";
 
 const state = {
     expositions: [],
 };
 const getters = {
     expositions: state => state.expositions,
+    expositionsSortedByDistance: (state, getters, rootState, rootGetters) => {
+        const currentLocation = rootGetters['location/location'];
+        if (currentLocation){
+            let expositionsWithDistances = assignDistances(state.expositions, currentLocation);
+            
+            return expositionsWithDistances.sort((a, b) => {
+                return a.distance - b.distance;
+            });
+        }
+        else{
+            return state.expositions;
+        }
+    },
 };
 const actions = {
-
     async LoadExpositions({ commit }, zooId) {
         const expositions = (
             await http.get(

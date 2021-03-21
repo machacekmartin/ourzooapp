@@ -18,7 +18,7 @@
 
     &__filter{
         margin: 0 .5rem;
-        background: $color-white;
+        background-color: $color-white;
         @include shadow-min-dark;
 
         &--active{
@@ -37,7 +37,7 @@
             left: 50%;
             transform: translateX(-50%);
             height: 10px;
-            background: $color-dark_gray;
+            background-color: $color-dark_gray;
             border-radius: 1rem;
             z-index: -1;
         }

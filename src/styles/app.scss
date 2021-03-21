@@ -8,6 +8,8 @@
 @import './defaults/core';
 @import './defaults/image';
 
+
+
 @import './components/_padding';
 @import './components/_margin';
 
@@ -17,6 +19,7 @@
 @import './components/_menu';
 @import './components/_map';
 @import './components/_tiles';
+@import './components/_grid';
 @import './components/_widget';
 @import './components/_tablet';
 @import './components/_horizontal-slider';
@@ -26,6 +29,9 @@
 @import './components/_text-link';
 @import './components/_button';
 @import './components/_icon';
+@import './components/_loading';
+
+@import './pages/_species';
 
 
 #app{

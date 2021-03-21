@@ -1,0 +1,83 @@
+<template>
+    <div class="page">    
+        <div class="species" v-if="oneSpecies">
+            <div class="species__header">
+                <img class="species__background" src="@/static/images/intro.jpg">
+                <img class="species__image" :src="'https://ourzoo.eu/assets/images/medium/'+ oneSpecies.image">
+            </div>
+           
+            <div class="species__body padding--h padding--lg-b padding--xl-t">
+                <h2 class="species__title padding--t">
+                    {{ oneSpecies.name }}
+                </h2>
+                <div class="species__details padding--sm-t padding--sm-b">
+                    <div class="species__detail">
+                        <span class="species__detail__icon">
+                            <icon icon="species"></icon>
+                        </span>
+                        <h4>{{ oneSpecies.type.name }}</h4>
+                    </div>
+                    <div class="species__detail">
+                        <span class="species__detail__icon">
+                            <icon icon="life"></icon>
+                        </span>
+                        <h4>{{ oneSpecies.life }}</h4>
+                    </div>
+                    <div class="species__detail">
+                        <span class="species__detail__icon">
+                            <icon icon="exclamation"></icon>
+                        </span>
+                        <h4>{{ oneSpecies.endangered }}</h4>
+                    </div>
+                    <div class="species__detail">
+                        <span class="species__detail__icon">
+                            <icon icon="size"></icon>
+                        </span>
+                        <h4>{{ oneSpecies.size }}</h4>
+                    </div>
+                </div>
+                <div class="species__buttons">
+                    <button class="button button--lblue button--texticon species__button" type="button">
+                        <span>Najít na mapě</span>
+                        <span class="species__button__icon">
+                            <icon icon="location"></icon>
+                        </span>
+                    </button>
+                    <button class="button button--dgreen" type="button">
+                        <icon icon="location"></icon>
+                    </button>
+
+                </div>
+            </div>
+            <h3 class="padding--lg-t padding--h">Galerie zvířete</h3>
+            <div class="horizontal-slider gallery">
+                <img class="gallery__item horizontal-slider__panel horizontal-slider__panel--small" v-for="image in oneSpecies.gallery.images" :src="'https://ourzoo.eu/assets/images/medium/'+ image">
+            </div>
+            <div class="species__info padding--t padding--h padding--lg-b">
+                <h3>Informace o tomto druhu</h3>
+                <p>{{ oneSpecies.description }}</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex';
+
+export default {
+    name: 'ZooOneSpecies',
+    components: {
+
+    },
+    methods: {
+        ...mapActions('species', ['LoadOneSpecies'])
+
+    },
+    computed: {
+        ...mapGetters('species', ['oneSpecies'])
+    },
+    async created(){
+        await this.LoadOneSpecies(this.$route.params.detailId);
+    }
+}
+</script>
