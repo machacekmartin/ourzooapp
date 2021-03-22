@@ -1,6 +1,17 @@
 .list{
+    $self: &;
     display: flex;
     flex-direction: column;
+
+    &--small{
+        #{ $self }__image{
+            width: 60px;
+            height: 55px;
+        }
+        #{ $self }__text{
+            display: none;
+        }
+    }
 
     &__item{
         display: flex;
@@ -26,6 +37,13 @@
 
     &__content{
         padding: 0 1.5rem;
+        overflow: hidden;
+    }
+
+    &__header{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     &__text{

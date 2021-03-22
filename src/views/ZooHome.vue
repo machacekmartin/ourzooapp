@@ -27,6 +27,9 @@
             </div>
             <list-widget :items="limitedExpositions"></list-widget>
         </div>
+        <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
+            <h3>Všechny expozice</h3>
+        </router-link>
     </div>
 </template>
 

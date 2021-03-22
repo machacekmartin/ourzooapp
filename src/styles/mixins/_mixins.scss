@@ -14,3 +14,13 @@
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0.175, 0.1, 0.1, 1);
 }
+
+@mixin remove-scroll{
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: auto;
+}

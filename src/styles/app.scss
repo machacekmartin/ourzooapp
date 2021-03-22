@@ -8,7 +8,7 @@
 @import './defaults/core';
 @import './defaults/image';
 
-
+@import './components/_body';
 
 @import './components/_padding';
 @import './components/_margin';
@@ -25,11 +25,14 @@
 @import './components/_horizontal-slider';
 @import './components/_banner';
 @import './components/_list';
+@import './components/_gallery';
 
 @import './components/_text-link';
 @import './components/_button';
 @import './components/_icon';
 @import './components/_loading';
+@import './components/_input';
+@import './components/_switch';
 
 @import './pages/_species';
 

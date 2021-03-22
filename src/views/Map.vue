@@ -7,7 +7,7 @@
                 <l-marker v-for="item in currentFilterGroup" :key="item._id" :lat-lng="markerLocation(item.location[0])">
                     <l-icon :icon-size="[54, 45]" :icon-anchor="[27, 45]" class-name="map__marker">
                         <div class="map__icon">
-                            <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" >
+                            <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
                         </div>
                     </l-icon>
                 </l-marker>

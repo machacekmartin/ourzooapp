@@ -3,7 +3,7 @@
         <div class="intro">
             <div class="intro__panel" :style="'transform: translateX('+currentPosition+'%)'">
                 <div class="intro__block">
-                    <img class="intro__image intro__image--lgreen" src="@/static/images/intro-panel-1.jpg">
+                    <img class="intro__image intro__image--lgreen" src="@/static/images/intro-panel-1.jpg" alt="background">
                     <div class="intro__content">
                         <div class="intro__content__header">
                             <h3>Vítejte v aplikaci</h3>
@@ -20,7 +20,7 @@
 
             <div class="intro__panel" :style="'transform: translateX('+currentPosition+'%)'">
                 <div class="intro__block">
-                    <img class="intro__image intro__image--lblue" src="@/static/images/intro-panel-2.jpeg">
+                    <img class="intro__image intro__image--lblue" src="@/static/images/intro-panel-2.jpeg" alt="background">
                     <div class="intro__content">
                         <div class="intro__content__header">
                             <h3>Doporučená nastavení</h3>

@@ -1,6 +1,6 @@
 <template>
     <div class="banner">
-        <img class="banner__background" src="@/static/images/map.png" >
+        <img class="banner__background" src="@/static/images/map.png" alt="map">
         <div class="banner__button">
             <p class="banner__text">Zobrazit interaktivní mapu</p>
             <span class="banner__icon">

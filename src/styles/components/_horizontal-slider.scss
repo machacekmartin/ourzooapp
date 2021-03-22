@@ -2,13 +2,7 @@
     $self: &;
     display: flex;
 
-    &::-webkit-scrollbar{
-        display: none;
-    }
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    overflow-x: auto;
+    @include remove-scroll;
 
     &__panel{
         position: relative;
@@ -30,12 +24,6 @@
             #{ $self }__image{
                 transform: scale(1.05);
             }
-        }
-
-        &--small{
-            width: 110px;
-            height: 100px;
-            object-fit: cover;
         }
     }
 

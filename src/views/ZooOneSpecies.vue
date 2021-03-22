@@ -2,8 +2,8 @@
     <div class="page">    
         <div class="species" v-if="oneSpecies">
             <div class="species__header">
-                <img class="species__background" src="@/static/images/intro.jpg">
-                <img class="species__image" :src="'https://ourzoo.eu/assets/images/medium/'+ oneSpecies.image">
+                <img class="species__background" src="@/static/images/intro.jpg" alt="species kind background">
+                <img class="species__image" :src="'https://ourzoo.eu/assets/images/medium/'+ oneSpecies.image" :alt="oneSpecies.name">
             </div>
            
             <div class="species__body padding--h padding--lg-b padding--xl-t">
@@ -50,9 +50,8 @@
                 </div>
             </div>
             <h3 class="padding--lg-t padding--h">Galerie zvířete</h3>
-            <div class="horizontal-slider gallery">
-                <img class="gallery__item horizontal-slider__panel horizontal-slider__panel--small" v-for="image in oneSpecies.gallery.images" :src="'https://ourzoo.eu/assets/images/medium/'+ image">
-            </div>
+            <gallery-widget :items="oneSpecies.gallery.images"></gallery-widget>
+
             <div class="species__info padding--t padding--h padding--lg-b">
                 <h3>Informace o tomto druhu</h3>
                 <p>{{ oneSpecies.description }}</p>
@@ -63,11 +62,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-
+import GalleryWidget from '@/components/widgets/Gallery.vue';
 export default {
     name: 'ZooOneSpecies',
     components: {
-
+        GalleryWidget,
     },
     methods: {
         ...mapActions('species', ['LoadOneSpecies'])

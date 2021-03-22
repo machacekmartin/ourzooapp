@@ -1,7 +1,7 @@
 <template>
     <div class="grid">
         <router-link :to="{ name: link, params: { id: item.zooId, detailId: item._id } }" class="grid__item" v-for="item in items">
-            <img class="grid__image" :src="'https://ourzoo.eu/assets/images/small/'+ item.image">
+            <img class="grid__image" :src="'https://ourzoo.eu/assets/images/small/'+ item.image" :alt="item.name">
             <p class="grid__text">{{ item.name }}</p>
         </router-link>
     </div>

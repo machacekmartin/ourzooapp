@@ -1,0 +1,47 @@
+.switch {
+    $self: &;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: $color-light-gray;
+
+    &__indicator {
+        position: absolute;
+        display: block;
+        width: 55px;
+        height: 55px;
+        background-color: $color-dark-green;
+        border-radius: 1rem;
+        @include transition;
+        z-index: 0;
+    }
+
+    &__icon {
+        width: 55px;
+        height: 55px;
+        padding: 0 1.25rem;
+        fill: $color-dark-gray;
+        z-index: 1;
+        @include transition;
+        cursor: pointer;
+
+        &.active {
+            fill: $color-white;
+        }
+
+        &[data-switch="0"].active {
+
+            ~#{ $self }__indicator {
+                transform: translateX(0);
+            }
+        }
+
+        &[data-switch="1"].active {
+            ~#{ $self }__indicator {
+                transform: translateX(100%);
+            }
+        }
+    }
+}

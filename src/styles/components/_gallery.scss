@@ -1,0 +1,97 @@
+.gallery{
+    $self: &;
+    position: relative;
+
+    &__items{
+        display: flex;
+        @include remove-scroll;
+    }
+    
+    &__item{
+        display: flex;
+        flex-shrink: 0;
+        width: 120px;
+        height: 110px;
+        margin-left: .5rem;
+        border-radius: 1rem;
+        transform: translateZ(0);
+        cursor: pointer;
+        overflow: hidden;
+
+        &:hover{
+            #{ $self }__image{
+                transform: scale(1.05);
+            }
+        }
+
+        &:first-child{
+            margin-left: 1rem;
+        }
+    }
+
+    &__image{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @include transition;
+    }
+
+    &__modal{
+        position: fixed;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 500000;
+        @include glass($color-dark_gray);
+        
+        &__slider{
+            scroll-snap-type: x mandatory;
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            @include remove-scroll;
+        }
+
+        &__item{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 2rem 0;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        &__image{
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: .5rem;
+            overflow: hidden;
+            @include shadow-min-dark;
+        }
+
+        &__control{
+            position: absolute;
+            display: flex;
+            width: 50px;
+            height: 50px;
+            bottom: 2rem;
+            padding: .8rem;
+            border-radius: .8rem;
+            background: $color-white;
+            cursor: pointer;
+            @include shadow-min-dark;
+
+            &:first-of-type{
+                left: 1.5rem;
+            }
+            &:last-of-type{
+                right: 1.5rem;
+            }
+        }
+    }
+}
