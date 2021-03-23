@@ -1,36 +1,36 @@
 <template>
-    <div class="page margin--h" v-if="species">
-        <h1 class="page__title margin--t">Zvířata v naší zoo</h1>
-        <div class="page__controls margin--t margin--b">
-            <label class="input margin--sm-r">
-                <span class="input__icon">
-                    <icon icon="search"></icon>
-                </span>
-                <input :value="searchValue" @input='evt => searchValue = evt.target.value' class="input__text margin--sm-l" type="text" placeholder="Vyhledat zvíře">
-            </label>
+    <div class="page" v-if="species">
+        <heading type="dual" title="Všechna zvířata v naší zoo"></heading>
+        <div class="page__controls margin--sm-t margin--b margin--h">
+            <search-widget @update="value => search = value" placeholder="Vyhledat zvíře" class="margin--sm-r"></search-widget>
             <switch-control @toggle-switch="updateSwitch" :icons="['list', 'grid']" :active="type"></switch-control>
         </div>
-        <component :is="type + '-widget'" :items="searchResult" link="Zoo One Species" size="small"></component>
+        <component class="margin--h" :is="type + '-widget'" :items="searchResult" link="Zoo One Species" size="small"></component>
     </div>
 </template>
 
 <script>
 import GridWidget from '@/components/widgets/Grid.vue';
 import ListWidget from '@/components/widgets/List.vue';
+import SearchWidget from '@/components/widgets/Search.vue';
 import SwitchControl from '@/components/Switch.vue';
+import Heading from '@/components/Heading.vue';
 import { mapActions, mapGetters } from 'vuex';
+import { filterBySearch } from '@/services/search';
 
 export default {
     name: 'ZooSpecies',
     components: {
         GridWidget,
         ListWidget,
-        SwitchControl
+        SearchWidget,
+        SwitchControl,
+        Heading
     },
     data(){
         return {
             type: 'grid',
-            searchValue: '',
+            search: ''
         }
     },
     methods: {
@@ -39,24 +39,13 @@ export default {
         updateSwitch(value){
             this.type = value;
         },  
-        
     },
     computed: {
         ...mapGetters('zoos', ['zoo']),
         ...mapGetters('species', ['species', 'speciesSortedByDistance']),
         searchResult(){
-            if (this.searchValue) {
-                return this.speciesSortedByDistance.filter(one => {
-                    return this.searchValue.toLowerCase().split(" ").every(word => {
-                        return (one.name.toLowerCase().includes(word))
-                    })
-                })
-            } 
-            else {
-                return this.speciesSortedByDistance
-            }
+            return filterBySearch(this.search, this.speciesSortedByDistance);
         }
-        
     },
     async created(){
         await this.LoadZoo(this.$route.params.id);

@@ -9,9 +9,7 @@
     cursor: pointer;
     @include transition;
 
-    &:hover{
-        background-color: $color-dark_gray;
-    }
+
 
     &--lgreen{
         background-color: $color-light_green;
@@ -27,8 +25,22 @@
         fill: $color-white;
         background-color: $color-dark_green;
     }
+    
 
     &--texticon{
         justify-content: space-between;
+
+        & > .icon{
+            width: 25px;
+            height: 25px;
+            margin-left: 1rem;
+        }
     }
+
+    &--active{
+        background-color: $color-dark_gray !important;
+        fill: $color-light_gray !important;
+    }
+
+    
 }

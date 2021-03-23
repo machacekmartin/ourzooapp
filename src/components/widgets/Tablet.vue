@@ -8,9 +8,7 @@
                 <span>{{ date }} {{ time }}</span> 
                 </p>
             </div>
-            <router-link to="Intro" class="tablet__button button">
-                <icon icon="announcements"></icon>
-            </router-link>
+            <custom-button @clicked="$router.push('/intro')" class="tablet__button" icon="announcements"></custom-button>
         </div>
     </div>
 </template>

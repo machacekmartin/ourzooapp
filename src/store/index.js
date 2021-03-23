@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import menu from './modules/menu';
 import permissions from './modules/permissions';
 import location from './modules/location';
 import zoos from './modules/zoos';
@@ -13,6 +14,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
+        menu,
         permissions,
         location,
         zoos,

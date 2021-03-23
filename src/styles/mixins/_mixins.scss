@@ -3,6 +3,9 @@
     backdrop-filter: blur($blur);
 }
 
+@mixin shadow-max{
+    box-shadow: 0px 0px 55px 0px rgba($color-dark_gray, .2);
+}
 @mixin shadow{
     box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
 }
@@ -11,7 +14,7 @@
 }
 
 @mixin transition(){
-    transition-duration: .5s;
+    transition-duration: .35s;
     transition-timing-function: cubic-bezier(0.175, 0.1, 0.1, 1);
 }
 

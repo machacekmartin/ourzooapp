@@ -1,5 +1,6 @@
 <template>
     <div class="page">
+        <heading type="single"></heading>
         <div class="map" v-if="zoo">
             <l-map ref="map" :zoom="zoom" :options="{ zoomControl: false}" :bounds="zoo.location" :max-bounds="zoo.location">
                 <l-tile-layer :url="tiles">
@@ -13,9 +14,7 @@
                 </l-marker>
             </l-map>
             <div class="map__filters">
-                <button class="map__filter button" :class="activeGroup == filter ? 'map__filter--active' : ''" v-for="filter in filters" @click="switchFilter(filter)">
-                    <icon :icon="filter"></icon>
-                </button>
+                <custom-button class="map__filter" :class="activeGroup == filter ? 'map__filter--active' : ''" v-for="filter in filters" @clicked="switchFilter(filter)" :key="filter" :icon="filter"></custom-button>
             </div>
         </div>
     </div>
@@ -24,6 +23,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { LMap, LTileLayer, LMarker, LIcon, LControl} from 'vue2-leaflet';
+import Heading from '@/components/Heading.vue';
 
 export default {
     name: 'Map',
@@ -32,7 +32,8 @@ export default {
         LTileLayer,
         LMarker,
         LIcon,
-        LControl
+        LControl,
+        Heading
     },
     data(){
         return{

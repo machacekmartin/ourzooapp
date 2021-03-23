@@ -1,5 +1,6 @@
 <template>
     <div class="page">    
+        <heading type="single"></heading>
         <div class="species" v-if="oneSpecies">
             <div class="species__header">
                 <img class="species__background" src="@/static/images/intro.jpg" alt="species kind background">
@@ -37,16 +38,8 @@
                     </div>
                 </div>
                 <div class="species__buttons">
-                    <button class="button button--lblue button--texticon species__button" type="button">
-                        <span>Najít na mapě</span>
-                        <span class="species__button__icon">
-                            <icon icon="location"></icon>
-                        </span>
-                    </button>
-                    <button class="button button--dgreen" type="button">
-                        <icon icon="location"></icon>
-                    </button>
-
+                    <custom-button class="button--texticon species__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
+                    <custom-button type="dgreen" icon="location"></custom-button>
                 </div>
             </div>
             <h3 class="padding--lg-t padding--h">Galerie zvířete</h3>
@@ -63,10 +56,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import GalleryWidget from '@/components/widgets/Gallery.vue';
+import Heading from '@/components/Heading.vue'
 export default {
     name: 'ZooOneSpecies',
     components: {
         GalleryWidget,
+        Heading
     },
     methods: {
         ...mapActions('species', ['LoadOneSpecies'])

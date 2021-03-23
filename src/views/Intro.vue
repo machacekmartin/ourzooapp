@@ -12,9 +12,7 @@
                         <p>Sjednocující aplikace pro jakoukoliv zoo,
                             která se do tohoto projektu chce zapojit.</p>
                     </div>
-                    <button @click="next()" class="intro__button button button--lgreen">
-                        <icon icon="next"></icon>
-                    </button>
+                    <custom-button @clicked="next()" class="intro__button" type="lgreen" icon="next"></custom-button>
                 </div>
             </div>
 
@@ -29,12 +27,8 @@
                                 class="intro__highlight intro__highlight--lblue">sdílení aktuální polohy</span></p>
                     </div>
                     <div class="intro__controls">
-                        <button @click="previous()" class="intro__button button button--dgreen">
-                            <icon icon="back"></icon>
-                        </button>
-                        <button @click="letsgo()" class="intro__button button button--lblue">
-                            <icon icon="checkmark"></icon>
-                        </button>
+                        <custom-button @clicked="previous()" class="intro__button" type="dgreen" icon="back"></custom-button>
+                        <custom-button @clicked="letsgo()" class="intro__button" type="lblue" icon="checkmark"></custom-button>
                     </div>
                 </div>
             </div>

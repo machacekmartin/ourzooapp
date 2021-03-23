@@ -1,6 +1,8 @@
 .page{
-    //padding-top: 3.5rem;
-    
+    position: relative;
+    background-color: $color-white;
+    @include transition;
+
     &--full{
         padding: 0;
     }

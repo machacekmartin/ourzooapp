@@ -1,0 +1,46 @@
+.heading{
+    &__title{
+        text-align: center;
+    }
+
+    &__button{
+        background-color: $color-light_gray;
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+    }
+
+    &__single{
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        z-index: 500;
+        
+        &__button{
+            background-color: $color-dark_green;
+            fill: $color-white;
+            @include shadow;
+        }
+    }
+
+    &__triple{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__dual{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: right;
+
+        &__title{
+            padding-left: 2rem;
+        }
+    }
+
+
+
+
+}

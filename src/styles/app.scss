@@ -13,8 +13,10 @@
 @import './components/_padding';
 @import './components/_margin';
 
+@import './components/_button';
+
 @import './components/_page';
-@import './components/_nav';
+@import './components/_heading';
 @import './components/_intro';
 @import './components/_menu';
 @import './components/_map';
@@ -28,7 +30,7 @@
 @import './components/_gallery';
 
 @import './components/_text-link';
-@import './components/_button';
+
 @import './components/_icon';
 @import './components/_loading';
 @import './components/_input';
@@ -38,13 +40,42 @@
 
 
 #app{
-    min-height: 100vh;
-    background-color: $color-white;   
+    min-height: 100vh; 
+    overflow-x: hidden; 
+}
+.app{
+    &__page{
+        min-height: 100vh;
+        max-height: 100vh;
+        max-height: auto;
+        background-color: $color-white;
+        @include transition;
+
+        &--mini{
+            transform: translateX(65%) scale(.7);
+            border-radius: 1.5rem;
+            cursor: pointer;
+            @include shadow-max;
+            overflow: auto;
+
+            &:hover{
+                transform: translateX(65%) scale(.725);
+            }
+
+            &--hideoverflow{
+                overflow: hidden;
+            }
+
+            & > .page{
+                pointer-events: none;
+            }
+        }
+    }
 }
 .fade-enter, .fade-leave-to{
-    transform: scale(.98);
+    transform: scale(.99);
     opacity: 0;
 }
 .fade-enter-active, .fade-leave-active{
-    transition: all .1s ease;
+    transition: .2s ease-in-out;
 }

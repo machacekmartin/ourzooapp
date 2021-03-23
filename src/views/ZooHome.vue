@@ -1,6 +1,6 @@
 <template>
     <div class="page margin--b" v-if="zoo && species && expositions && latestAnnouncement">
-        <h1>{{ zoo.name }}</h1>
+        <heading type="triple" :title="zoo.name" ></heading>
         <div class="widget margin--t margin--h">
             <div class="widget__header margin--sm-b">
                 <h3>Nejnovější oznámení</h3>
@@ -11,7 +11,7 @@
             <div class="widget__header margin--h margin--sm-b">
                 <h3>Nejbližší zvířata v této zoo</h3>
             </div>
-            <horizontal-slider-widget v-if="limitedSpecies" :data="limitedSpecies"></horizontal-slider-widget>
+            <horizontal-slider-widget v-if="limitedSpecies" :data="limitedSpecies" link="Zoo One Species"></horizontal-slider-widget>
         </div>
         <router-link :to="{ name: 'Zoo Species', params: { id: zoo._id } }" class="text-link margin--t">
             <h3>Všechna zvířata</h3>
@@ -27,9 +27,9 @@
             </div>
             <list-widget :items="limitedExpositions"></list-widget>
         </div>
-        <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
+        <!--<router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
             <h3>Všechny expozice</h3>
-        </router-link>
+        </router-link>-->
     </div>
 </template>
 
@@ -39,6 +39,7 @@ import TabletWidget from '@/components/widgets/Tablet.vue';
 import HorizontalSliderWidget from '@/components/widgets/HorizontalSlider.vue';
 import BannerWidget from '@/components/widgets/Banner.vue';
 import ListWidget from '@/components/widgets/List.vue';
+import Heading from '@/components/Heading.vue';
 
 export default {
     name: 'ZooHome',
@@ -46,7 +47,8 @@ export default {
         TabletWidget,
         HorizontalSliderWidget,
         BannerWidget,
-        ListWidget
+        ListWidget,
+        Heading
     },
     data(){
         return{

@@ -6,7 +6,7 @@
         <span @click="toggleSwitch(icons[1])" class="switch__icon" :class="active === icons[1] ? 'active' : ''" data-switch="1">
             <icon :icon="icons[1]" ></icon>
         </span>
-        <span class="switch__indicator"> </span>
+        <span class="switch__indicator"></span>
     </div>
 </template>
 

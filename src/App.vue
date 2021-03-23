@@ -1,28 +1,33 @@
 <template>
-    <div id="app">
-        <!--<navigation></navigation>-->
-        <transition name="fade" mode="out-in">
-            <router-view />
-        </transition>
+    <div id="app" class="app">
+        <menu-component :class="isActive ? 'menu--active' : ''"></menu-component>
+        <div class="app__page" v-on="isActive ? { click: () => UpdateIsActive(false) } : {}" :class="[(isActive ? 'app__page--mini' : ''), (isOverflowHidden ? 'app__page--mini--hideoverflow' : '')]">
+            <transition name="fade" mode="out-in">
+                <router-view />
+            </transition>
+        </div>
     </div>
 </template>
 <script>
-import Nav from '@/components/Nav.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
+import Menu from '@/components/Menu.vue';
 
 export default {
     components: {
-        Navigation: Nav
+        MenuComponent: Menu
     },
     data() {
         return {
-        }
+
+        }   
     },
     methods: {
         ...mapActions('location', ['UpdateLocation']),
+        ...mapActions('menu', ['UpdateIsActive']),
     },
     computed: {
-        ...mapGetters('location', ['location'])
+        ...mapGetters('location', ['location']),
+        ...mapGetters('menu', ['isActive', 'isOverflowHidden']),
     },
     created(){
         document.addEventListener('deviceready', (success) => {
