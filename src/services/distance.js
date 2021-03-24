@@ -1,17 +1,20 @@
 export const assignDistances = (items, currentLocation) =>{
     items.forEach(item => {
-        const lat1 = Math.PI * item.location[0].lat / 180;
-        const lat2 = Math.PI * currentLocation.lat / 180;
+        var radlat1 = Math.PI * item.location[0].lat / 180;
+		var radlat2 = Math.PI * currentLocation.lat / 180;
+		var theta = item.location[0].lng - currentLocation.lng;
 
-        const lng1 = Math.PI * item.location[0].lng / 180;
-        const lng2 = Math.PI * currentLocation.lng / 180;
+		var radtheta = Math.PI * theta / 180;
 
-        const theta = lng1 - lng2;
-        const radtheta = Math.PI * theta / 180;
-        let dist = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(radtheta);
-        dist = Math.acos(dist) * 180 / Math.PI * 60 * 1.1515 * 1.609344;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180 / Math.PI;
+		dist = dist * 60 * 1.1515;
 
-        item['distance'] = dist;
+		item['distance'] = dist * 1.609344;
     });
     return items;
 }

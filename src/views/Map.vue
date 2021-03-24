@@ -2,7 +2,7 @@
     <div class="page">
         <heading type="single"></heading>
         <div class="map" v-if="zoo">
-            <l-map ref="map" :zoom="zoom" :options="{ zoomControl: false}" :bounds="zoo.location" :max-bounds="zoo.location">
+            <l-map ref="map" :zoom="zoom" :options="{ zoomControl: false}" :bounds="zoo.location.length > 1" :max-bounds="zoo.location.length > 1 ? zoo.location : null">
                 <l-tile-layer :url="tiles">
                 </l-tile-layer>
                 <l-marker v-for="item in currentFilterGroup" :key="item._id" :lat-lng="markerLocation(item.location[0])">

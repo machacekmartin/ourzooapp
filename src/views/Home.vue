@@ -1,5 +1,5 @@
 <template>
-    <div class="page padding--h">
+    <div class="page padding--h" v-if="zoos">
         <heading type="title" title="Zoo v této aplikaci"></heading>
         <div class="page__controls margin--t">
             <search-widget @update="value => search = value" placeholder="Vyhledat zoo podle názvu" class="margin--b"></search-widget>
@@ -12,7 +12,29 @@
                     <small class="tiles__subtitle">{{ zoo.address }}</small>
                     <div class="tiles__details">
                         <small>{{ zoo.hours }}</small>
-                        <small class="tiles__distance">64km</small>
+                       
+                        <template v-if="zoo.distance">
+                            <template v-if="zoo.distance <= 0.999">
+                                <small class="tiles__distance">
+                                    {{ (zoo.distance * 1000).toFixed(0) }}m
+                                </small>
+                            </template>
+                            <template v-else-if="zoo.distance >= 10">
+                                <small class="tiles__distance">
+                                    {{ zoo.distance.toFixed(0) }}km
+                                </small>
+                            </template>
+                            <template v-else>
+                                <small class="tiles__distance">
+                                    {{ zoo.distance.toFixed(2) }}km
+                                </small>
+                            </template>   
+                        </template>  
+                         <template v-else>
+                            <small class="tiles__distance">
+                                <loading></loading>
+                            </small>
+                        </template>    
                     </div>
                 </div>
             </router-link>
@@ -38,9 +60,9 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('zoos', ['zoos']),
+        ...mapGetters('zoos', ['zoos', 'zoosSortedByDistance']),
         searchResult(){
-            return filterBySearch(this.search, this.zoos);
+            return filterBySearch(this.search, this.zoosSortedByDistance);
         }
     },
     methods: {

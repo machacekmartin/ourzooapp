@@ -1,4 +1,5 @@
 import { http } from "@/services/axios";
+import { assignDistances } from "@/services/distance";
 
 const state = {
     zoos: null,
@@ -6,7 +7,20 @@ const state = {
 };
 const getters = {
     zoos: state => state.zoos,
-    zoo: state => state.zoo
+    zoo: state => state.zoo,
+    zoosSortedByDistance: (state, getters, rootState, rootGetters) => {
+        const currentLocation = rootGetters['location/location'];
+        if (currentLocation){
+            let zoosWithDistances = assignDistances(state.zoos, currentLocation);
+            
+            return zoosWithDistances.sort((a, b) => {
+                return a.distance - b.distance;
+            });
+        }
+        else{
+            return state.zoos;
+        }
+    },
 };
 const actions = {
     async LoadZoos({ commit }) {

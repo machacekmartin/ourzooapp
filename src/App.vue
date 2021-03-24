@@ -6,7 +6,9 @@
                 <router-view />
             </transition>
         </div>
+        <p v-if="location" style="position: fixed; bottom: 0; background: black; color: white; padding: .25rem .5rem">{{ location.lat }} | {{ location.lng }}</p>
     </div>
+    
 </template>
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex';
@@ -31,9 +33,20 @@ export default {
     },
     created(){
         document.addEventListener('deviceready', (success) => {
-            navigator.geolocation.watchPosition(succ => {
+            navigator.geolocation.getCurrentPosition(succ => {
                 this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
-            }, err => {}, { enableHighAccuracy: true });
+            }, err => {
+                alert(err.message);
+            }, { enableHighAccuracy: true, maximumAge: 1000 })
+
+            navigator.geolocation.watchPosition(succ => {
+                console.log("Hey, you moved!", succ.coords.latitude, succ.coords.longitude);
+                if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
+                    this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
+                }
+            }, err => {
+                alert(err.message);
+            }, { enableHighAccuracy: true, maximumAge: 30000 });
         })
     }
 }
