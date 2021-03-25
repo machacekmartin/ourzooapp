@@ -11,29 +11,33 @@
                 </span>
                 <p class="menu__text">Zvířata v naší zoo</p>
             </router-link>
-            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
-                <span class="menu__icon">
-                    <icon icon="expositions"></icon>
-                </span>
-                <p class="menu__text">Naše expozice</p>
-            </router-link>
-            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+
+            <router-link class="menu__item" :to="{ name: 'Zoo Map', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon">
                     <icon icon="location"></icon>
                 </span>
                 <p class="menu__text">Interaktivní mapa</p>
             </router-link>
-            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+            
+            <router-link class="menu__item" :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon">
-                    <icon icon="calendar"></icon>
+                    <icon icon="expositions"></icon>
                 </span>
-                <p class="menu__text">Události</p>
+                <p class="menu__text">Naše expozice</p>
             </router-link>
+
             <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon">
-                    <icon icon="species"></icon>
+                    <icon icon="events"></icon>
                 </span>
-                <p class="menu__text">Novinky</p>
+                <p class="menu__text">Kalendář</p>
+            </router-link>
+
+            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+                <span class="menu__icon">
+                    <icon icon="announcements"></icon>
+                </span>
+                <p class="menu__text">Oznámení</p>
             </router-link>
         </div>
 

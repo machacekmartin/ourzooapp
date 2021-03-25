@@ -6,7 +6,7 @@
                 <router-view />
             </transition>
         </div>
-        <p v-if="location" style="position: fixed; bottom: 0; background: black; color: white; padding: .25rem .5rem">{{ location.lat }} | {{ location.lng }}</p>
+        <p v-if="location" style="z-index: 9999999; position: fixed; bottom: 0; background: black; color: white; padding: .25rem .5rem">{{ location.lat }} | {{ location.lng }}</p>
     </div>
     
 </template>

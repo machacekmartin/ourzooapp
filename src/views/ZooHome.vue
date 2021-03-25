@@ -25,11 +25,11 @@
             <div class="widget__header margin--sm-b">
                 <h3>Nejbližší expozice</h3>
             </div>
-            <list-widget :items="limitedExpositions"></list-widget>
+            <list-widget :items="limitedExpositions" link="Zoo Exposition"></list-widget>
         </div>
-        <!--<router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
+        <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t padding--lg-b">
             <h3>Všechny expozice</h3>
-        </router-link>-->
+        </router-link>
     </div>
 </template>
 

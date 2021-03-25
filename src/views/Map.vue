@@ -2,14 +2,31 @@
     <div class="page">
         <heading type="single"></heading>
         <div class="map" v-if="zoo">
-            <l-map ref="map" :zoom="zoom" :options="{ zoomControl: false}" :bounds="zoo.location.length > 1" :max-bounds="zoo.location.length > 1 ? zoo.location : null">
-                <l-tile-layer :url="tiles">
-                </l-tile-layer>
-                <l-marker v-for="item in currentFilterGroup" :key="item._id" :lat-lng="markerLocation(item.location[0])">
-                    <l-icon :icon-size="[54, 45]" :icon-anchor="[27, 45]" class-name="map__marker">
-                        <div class="map__icon">
-                            <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
-                        </div>
+            <l-map ref="mymap" @ready="checkWhere" :zoom="zoom" :options="{ zoomControl: false }" :bounds="zoo.location.length > 1 ? zoo.location : maxBounds">
+                <l-tile-layer :url="tiles"></l-tile-layer>
+                <!--<l-polygon :lat-lngs="zoo.location"></l-polygon>-->
+                <div v-for="item in currentFilterGroup" :key="item._id">
+                    <template v-if="shouldBePolygon(item.location)">
+                        <l-polygon :lat-lngs="item.location" color="green"></l-polygon>
+                        <l-marker :lat-lng="getCenterOfPolygon(item.location)">
+                            <l-icon :icon-size="[56, 50]" :icon-anchor="[28, 50]" :class-name="'map__marker map__marker--' + activeGroup">
+                                <div class="map__icon">
+                                    <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
+                                </div>
+                            </l-icon>
+                        </l-marker>
+                    </template>
+                    <l-marker v-else :lat-lng="item.location[0]">
+                        <l-icon :icon-size="[56, 50]" :icon-anchor="[28, 50]" :class-name="'map__marker map__marker--' + activeGroup">
+                            <div class="map__icon" :class="'map__icon--' + activeGroup">
+                                <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
+                            </div>
+                        </l-icon>
+                    </l-marker>
+                </div>
+                <l-marker v-if="location" :lat-lng="location">
+                    <l-icon :icon-size="[24,24]" :icon-anchor="[12,12]" class-name="map__user-marker">
+                        <div class="map__user-icon"></div>
                     </l-icon>
                 </l-marker>
             </l-map>
@@ -22,7 +39,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { LMap, LTileLayer, LMarker, LIcon, LControl} from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LIcon, LControl, LPolygon} from 'vue2-leaflet';
+import { latLngBounds, polyline } from 'leaflet';
 import Heading from '@/components/Heading.vue';
 
 export default {
@@ -33,10 +51,15 @@ export default {
         LMarker,
         LIcon,
         LControl,
-        Heading
+        Heading,
+        LPolygon
     },
     data(){
         return{
+            maxBounds: latLngBounds([
+                [51.21930142931449, 11.90525934382021],
+                [48.42988280874944, 18.739304087362544]
+            ]),
             zoom: 5,
             tiles: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             filters: [
@@ -52,6 +75,7 @@ export default {
         ...mapGetters('species', ['species']),
         ...mapGetters('expositions', ['expositions']),
         ...mapGetters('facilities', ['facilities']),
+        ...mapGetters('location', ['location']),
 
         currentFilterGroup(){
             switch(this.activeGroup){
@@ -62,7 +86,8 @@ export default {
                 case 'facilities':
                     return this.facilities;
             }
-        }
+        },
+        
     },
     methods:{
         ...mapActions('zoos', ['LoadZoo']),
@@ -73,8 +98,16 @@ export default {
         switchFilter(group){
             this.activeGroup = group;
         },
-        markerLocation(marker){
-            return [marker.lat, marker.lng];
+        shouldBePolygon(location){
+            return location.length > 1;
+        },
+        getCenterOfPolygon(polygon){
+            return polyline(polygon).getBounds().getCenter();
+        },
+        checkWhere(){
+            if (!this.$refs.mymap.mapObject.getBounds().contains(this.location)){
+                alert("Nejsi tam");
+            }
         }
     },
     async created(){
@@ -82,6 +115,6 @@ export default {
         await this.LoadSpecies(this.$route.params.id);
         await this.LoadExpositions(this.$route.params.id);
         await this.LoadFacilities(this.$route.params.id);
-    }
+    },
 }
 </script>

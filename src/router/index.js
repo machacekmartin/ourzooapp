@@ -4,10 +4,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Intro from '../views/Intro.vue'
 
-
 import ZooHome from '../views/ZooHome.vue'
 import ZooSpecies from '../views/ZooSpecies.vue'
 import ZooOneSpecies from '../views/ZooOneSpecies.vue'
+import ZooExpositions from '../views/ZooExpositions.vue'
+import ZooExposition from '../views/ZooExposition.vue'
 import ZooMap from '../views/Map.vue'
 
 
@@ -18,7 +19,6 @@ const routes = [
         path: '/',
         name: 'Intro',
         component: Intro,
-        
     },
     {
         path: '/home',
@@ -44,6 +44,16 @@ const routes = [
         path: '/zoo/:id/species/:detailId',
         name: 'Zoo One Species',
         component: ZooOneSpecies
+    },
+    {
+        path: '/zoo/:id/expositions',
+        name: 'Zoo Expositions',
+        component: ZooExpositions
+    },
+    {
+        path: '/zoo/:id/exposition/:detailId',
+        name: 'Zoo Exposition',
+        component: ZooExposition
     },
 ]
 

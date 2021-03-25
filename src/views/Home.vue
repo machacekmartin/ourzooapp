@@ -1,10 +1,10 @@
 <template>
-    <div class="page padding--h" v-if="zoos">
+    <div class="page padding--h">
         <heading type="title" title="Zoo v této aplikaci"></heading>
         <div class="page__controls margin--t">
             <search-widget @update="value => search = value" placeholder="Vyhledat zoo podle názvu" class="margin--b"></search-widget>
         </div>
-        <div class="tiles tiles--huge">
+        <div class="tiles tiles--huge" v-if="zoos">
             <router-link :to="{ name: 'Zoo Home', params: { id: zoo._id } }" v-for="zoo in searchResult" :key="zoo._id" class="tiles__item">
                 <img :src="'https://ourzoo.eu/assets/images/medium/'+zoo.thumbnail" class="tiles__image" alt="zoo">
                 <div class="tiles__content">

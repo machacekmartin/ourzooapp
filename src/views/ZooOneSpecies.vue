@@ -2,50 +2,50 @@
     <div class="page">    
         <heading type="single"></heading>
         <div class="species" v-if="oneSpecies">
-            <div class="species__header">
-                <img class="species__background" src="@/static/images/intro.jpg" alt="species kind background">
-                <img class="species__image" :src="'https://ourzoo.eu/assets/images/medium/'+ oneSpecies.image" :alt="oneSpecies.name">
+            <div class="page__header">
+                <img class="page__background" src="@/static/images/intro.jpg" alt="species kind background">
+                <img class="page__image" :src="'https://ourzoo.eu/assets/images/medium/'+ oneSpecies.image" :alt="oneSpecies.name">
             </div>
            
-            <div class="species__body padding--h padding--lg-b padding--xl-t">
-                <h2 class="species__title padding--t">
+            <div class="page__body padding--h padding--lg-b padding--xl-t">
+                <h2 class="page__title padding--t">
                     {{ oneSpecies.name }}
                 </h2>
-                <div class="species__details padding--sm-t padding--sm-b">
-                    <div class="species__detail">
-                        <span class="species__detail__icon">
+                <div class="page__details padding--sm-t padding--sm-b">
+                    <div class="page__detail">
+                        <span class="page__detail__icon">
                             <icon icon="species"></icon>
                         </span>
                         <h4>{{ oneSpecies.type.name }}</h4>
                     </div>
-                    <div class="species__detail">
-                        <span class="species__detail__icon">
+                    <div class="page__detail">
+                        <span class="page__detail__icon">
                             <icon icon="life"></icon>
                         </span>
                         <h4>{{ oneSpecies.life }}</h4>
                     </div>
-                    <div class="species__detail">
-                        <span class="species__detail__icon">
+                    <div class="page__detail">
+                        <span class="page__detail__icon">
                             <icon icon="exclamation"></icon>
                         </span>
                         <h4>{{ oneSpecies.endangered }}</h4>
                     </div>
-                    <div class="species__detail">
-                        <span class="species__detail__icon">
+                    <div class="page__detail">
+                        <span class="page__detail__icon">
                             <icon icon="size"></icon>
                         </span>
                         <h4>{{ oneSpecies.size }}</h4>
                     </div>
                 </div>
-                <div class="species__buttons">
-                    <custom-button class="button--texticon species__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
+                <div class="page__buttons">
+                    <custom-button class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
                     <custom-button type="dgreen" icon="location"></custom-button>
                 </div>
             </div>
             <h3 class="padding--lg-t padding--h">Galerie zvířete</h3>
             <gallery-widget :items="oneSpecies.gallery.images"></gallery-widget>
 
-            <div class="species__info padding--t padding--h padding--lg-b">
+            <div class="page__info padding--t padding--h padding--lg-b">
                 <h3>Informace o tomto druhu</h3>
                 <p>{{ oneSpecies.description }}</p>
             </div>

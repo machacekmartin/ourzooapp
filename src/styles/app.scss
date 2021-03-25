@@ -36,8 +36,6 @@
 @import './components/_input';
 @import './components/_switch';
 
-@import './pages/_species';
-
 
 #app{
     min-height: 100vh; 
@@ -49,8 +47,8 @@
         max-height: 100vh;
         max-height: auto;
         background-color: $color-white;
-        @include transition;
-
+        @include transition;        
+     
         &--mini{
             transform: translateX(65%) scale(.7);
             border-radius: 1.5rem;
@@ -73,9 +71,9 @@
     }
 }
 .fade-enter, .fade-leave-to{
-    transform: scale(.99);
+    
     opacity: 0;
 }
 .fade-enter-active, .fade-leave-active{
-    transition: .2s ease-in-out;
+    transition: .175s ease-in-out;
 }

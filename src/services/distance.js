@@ -1,8 +1,11 @@
+import { polyline } from 'leaflet';
+
 export const assignDistances = (items, currentLocation) =>{
     items.forEach(item => {
-        var radlat1 = Math.PI * item.location[0].lat / 180;
+		const center = polyline(item.location).getBounds().getCenter();
+        var radlat1 = Math.PI * center.lat / 180;
 		var radlat2 = Math.PI * currentLocation.lat / 180;
-		var theta = item.location[0].lng - currentLocation.lng;
+		var theta = center.lng - currentLocation.lng;
 
 		var radtheta = Math.PI * theta / 180;
 
@@ -15,9 +18,9 @@ export const assignDistances = (items, currentLocation) =>{
 		dist = dist * 60 * 1.1515;
 
 		item['distance'] = dist * 1.609344;
+		//item['center'] = center;
     });
     return items;
 }
-
 
 export default assignDistances;

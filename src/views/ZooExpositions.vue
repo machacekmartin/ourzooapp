@@ -1,11 +1,11 @@
 <template>
     <div class="page">
-        <heading type="dual" title="Zvířata v naší zoo"></heading>
+        <heading type="dual" title="Expozice v naší zoo"></heading>
         <div class="page__controls margin--sm-t margin--b margin--h">
-            <search-widget @update="value => search = value" placeholder="Vyhledat zvíře" class="margin--sm-r"></search-widget>
+            <search-widget @update="value => search = value" placeholder="Vyhledat expozici" class="margin--sm-r"></search-widget>
             <switch-control @toggle-switch="updateSwitch" :icons="['list', 'grid']" :active="type"></switch-control>
         </div>
-        <component v-if="species" class="margin--h" :is="type + '-widget'" :items="searchResult" link="Zoo One Species" size="small"></component>
+        <component v-if="expositions" class="margin--h" :is="type + '-widget'" :items="searchResult" link="Zoo Exposition" size="small"></component>
     </div>
 </template>
 
@@ -19,7 +19,7 @@ import { mapActions, mapGetters } from 'vuex';
 import { filterBySearch } from '@/services/search';
 
 export default {
-    name: 'ZooSpecies',
+    name: 'ZooExpositions',
     components: {
         GridWidget,
         ListWidget,
@@ -29,12 +29,12 @@ export default {
     },
     data(){
         return {
-            type: 'grid',
+            type: 'list',
             search: ''
         }
     },
     methods: {
-        ...mapActions('species', ['LoadSpecies']),
+        ...mapActions('expositions', ['LoadExpositions']),
         ...mapActions('zoos', ['LoadZoo']),
         updateSwitch(value){
             this.type = value;
@@ -42,14 +42,14 @@ export default {
     },
     computed: {
         ...mapGetters('zoos', ['zoo']),
-        ...mapGetters('species', ['species', 'speciesSortedByDistance']),
+        ...mapGetters('expositions', ['expositions', 'expositionsSortedByDistance']),
         searchResult(){
-            return filterBySearch(this.search, this.speciesSortedByDistance);
+            return filterBySearch(this.search, this.expositionsSortedByDistance);
         }
     },
     async created(){
         await this.LoadZoo(this.$route.params.id);
-        await this.LoadSpecies(this.$route.params.id);
-    }
+        await this.LoadExpositions(this.$route.params.id);
+    },
 }
 </script>
