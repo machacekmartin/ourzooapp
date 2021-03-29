@@ -8,7 +8,7 @@
                 <span>{{ date }} {{ time }}</span> 
                 </p>
             </div>
-            <custom-button @clicked="$router.push('/intro')" class="tablet__button" icon="announcements"></custom-button>
+            <custom-button @clicked="$router.push({ name: link, params: { id: zoo._id } })" class="tablet__button" icon="announcements"></custom-button>
         </div>
     </div>
 </template>
@@ -16,8 +16,9 @@
 import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'TabletWidget',
-    props: ['data'],
+    props: ['data', 'link'],
     computed: {
+        ...mapGetters('zoos', ['zoo']),
         date(){
             let date = this.data.datetime.split(' ')[0];
             date = date.split('-').reverse().join('. ');

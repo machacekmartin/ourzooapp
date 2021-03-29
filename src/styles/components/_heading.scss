@@ -32,15 +32,11 @@
     &__dual{
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
         text-align: right;
 
         &__title{
-            padding-left: 2rem;
+            padding-left: 1rem;
         }
     }
-
-
-
-
 }

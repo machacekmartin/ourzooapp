@@ -1,0 +1,130 @@
+.timeline{
+    $self: &;
+    position: relative;
+
+    &:after{
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0), $color-dark_green, rgba(0,0,0,0));
+    }
+
+    &__item{
+        display: flex;
+        margin-top: 1.5rem;
+        cursor: pointer;
+
+        &--active{
+            width: 100%;
+            flex-shrink: 0;
+
+            #{ $self }__panel{
+                background-color: $color-dark_green;
+                &:before{
+                    background-color: $color-dark_green;
+                }
+            }
+            #{ $self }__text{
+                max-height: none;
+                
+                &:after{
+                    background: linear-gradient(to top, $color-dark_green, rgba($color-dark_green, 0));
+                    opacity: 0;
+                }
+            }
+        } 
+
+        &:first-child{
+            margin-top: .5rem;
+            padding-top: 2.5rem;
+        }
+    }
+
+
+    &__point{
+        flex-shrink: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+        background-color: $color-white;
+        border: solid 4px $color-light_green;
+        margin-left:  calc(-.625rem + 1.5px);
+        margin-top: .75rem;
+        z-index: 1;
+    }
+
+
+    &__datetime{
+        display: flex;
+        flex-direction: column;
+
+        padding-left: .25rem;   
+        width: 70px;
+    }
+
+    &__date{
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+    &__year{
+        color: $color-gray;
+        font-weight: 600;
+    }
+
+    &__panel{
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-left: .5rem;
+        border-radius: 1rem;
+        padding: .75rem 1rem;
+        background: $color-light_green;
+        color: $color-white;
+        @include transition;
+
+        &:before{
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: 11px;
+            left: -6px;
+            background: $color-light_green;
+            transform: rotate(45deg);
+            @include transition;
+        }
+    }
+
+    &__name{
+        margin-bottom: .5rem;
+    }
+
+    &__text{
+        position: relative;
+        max-height: calc(5 * calc(15px * 1.5));
+        overflow: hidden;
+        @include transition;
+
+        &:after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            bottom: 0;
+            left: 0;
+            background: $color-light_green;
+            background: linear-gradient(to top, $color-light_green, rgba($color-light_green, 0));
+        }
+    }
+
+    &__toggle{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: $color-white;
+    }
+}

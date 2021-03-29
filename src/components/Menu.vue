@@ -33,11 +33,17 @@
                 <p class="menu__text">Kalendář</p>
             </router-link>
 
-            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+            <router-link class="menu__item" :to="{ name: 'Zoo Announcements', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon">
                     <icon icon="announcements"></icon>
                 </span>
                 <p class="menu__text">Oznámení</p>
+            </router-link>
+            <router-link class="menu__item" :to="{ name: 'Zoo Info', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+                <span class="menu__icon">
+                    <icon icon="life"></icon>
+                </span>
+                <p class="menu__text">O naší zoo</p>
             </router-link>
         </div>
 

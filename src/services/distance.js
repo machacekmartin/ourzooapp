@@ -18,7 +18,6 @@ export const assignDistances = (items, currentLocation) =>{
 		dist = dist * 60 * 1.1515;
 
 		item['distance'] = dist * 1.609344;
-		//item['center'] = center;
     });
     return items;
 }

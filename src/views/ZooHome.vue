@@ -5,7 +5,7 @@
             <div class="widget__header margin--sm-b">
                 <h3>Nejnovější oznámení</h3>
             </div>
-            <tablet-widget v-if="latestAnnouncement" :data="latestAnnouncement"></tablet-widget>
+            <tablet-widget v-if="latestAnnouncement" :data="latestAnnouncement" link="Zoo Announcements"></tablet-widget>
         </div>
         <div class="widget margin--t">
             <div class="widget__header margin--h margin--sm-b">

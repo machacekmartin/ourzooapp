@@ -105,10 +105,10 @@ export default {
             return polyline(polygon).getBounds().getCenter();
         },
         checkWhere(){
-            if (!this.$refs.mymap.mapObject.getBounds().contains(this.location)){
-                alert("Nejsi tam");
+            if (!this.location || !this.$refs.mymap.mapObject.getBounds().contains(this.location)){
+                console.log("Nejsi tam");
             }
-        }
+        },
     },
     async created(){
         await this.LoadZoo(this.$route.params.id);

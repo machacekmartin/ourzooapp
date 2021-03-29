@@ -8,7 +8,7 @@
         </div>
         <div v-if="type === 'dual'" class="heading__dual">
             <custom-button @clicked="$router.go(-1)" class="heading__button" icon="back"></custom-button>
-            <h1 class="heading__dual__title">{{ title }}</h1>
+            <h1 class="heading__dual__title" >{{ title }}</h1>
         </div>
         <div v-if="type === 'triple'" class="heading__triple">
             <custom-button @clicked="activateMenu()" class="heading__button" icon="menu"></custom-button>
@@ -24,12 +24,17 @@ import { mapActions } from 'vuex';
 export default {
     name: 'Heading',
     props: ['title', 'type'],
+    computed: {
+        
+    },
     methods: {
         ...mapActions('menu', ['UpdateIsActive']),
         activateMenu(){
             this.UpdateIsActive(true);
-        }
+        },
+
     },
+    
 
 
 

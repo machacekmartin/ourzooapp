@@ -38,6 +38,14 @@
         object-fit: cover;
         border-radius: 0 0 2rem 2rem;
         @include shadow;
+
+        &--static{
+            height: 250px;
+            padding: 4rem 2rem 2rem;
+            object-fit: contain;
+            background-color: $color-white;
+            @include shadow;
+        }
     }
 
     &__body{
@@ -80,12 +88,25 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: .5rem;
+
+        &--rows{
+            grid-template-columns: 1fr;
+        }
     }
 
     &__detail{
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
+        &__small{
+            font-weight: 500;
+            color: $color-dark_green;
+        }
+
+        &__link{
+            text-decoration: underline;
+        }
 
         &__icon{
             display: flex;
@@ -99,4 +120,5 @@
             border: solid 3px $color-light_gray;
         }
     }
+
 }
