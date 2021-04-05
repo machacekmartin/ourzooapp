@@ -5,8 +5,8 @@
                 <h4>{{ text }}</h4>
             </div>
             <div class="popup__controls">
-                <custom-button class="popup__button button--lgreen" type="textinfo" @clicked="emitClick(1)" :text="agree"></custom-button>
-                <custom-button class="popup__button button--red" type="textinfo" @clicked="emitClick(0)" :text="cancel"></custom-button>
+                <custom-button v-if="agree" class="popup__button button--lgreen" type="textinfo" @clicked="emitClick(1)" :text="agree"></custom-button>
+                <custom-button v-if="cancel" class="popup__button button--red" type="textinfo" @clicked="emitClick(0)" :text="cancel"></custom-button>
             </div>
         </div>
     </div>

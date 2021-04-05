@@ -3,11 +3,10 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 150px;
     left: 0;
     bottom: 0;
     border-radius: 2rem 2rem 0 0;
-    padding: 1.5rem 1.5rem 3rem 1.5rem;
+    padding: 1.5rem 1rem 3rem 1rem;
     z-index: 1000;
     @include glass($color-light_gray, .6, .85rem);
     @include shadow;
@@ -25,12 +24,16 @@
     &__detail{
         justify-self: flex-start;
         align-self: stretch;
-        width: 100%;
+        max-width: calc(100% - 45px - 60px);
         padding: .25rem 0 0 1rem;
     }
 
     &__title{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         text-align: left;
+        overflow: hidden;
     }
 
     &__stats{

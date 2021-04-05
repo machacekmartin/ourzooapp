@@ -37,14 +37,17 @@
                 <custom-button class="map__filter" :class="activeGroup == filter ? 'map__filter--active' : ''" v-for="filter in filters" @clicked="switchFilter(filter)" :key="filter" :icon="filter"></custom-button>
             </div>
             <transition name="slide" mode="out-in">
-                <sliding-modal v-if="sliderActive" @close="deactivateSlider()" @show="redirect()" @navigate="activateNavigation(activeDetail.location[0])" :text="activeDetail.description" :title="activeDetail.name" :active="sliderActive" :image="activeDetail.image" :showPage="activeGroup == 'facilities' ? false : true"></sliding-modal>
+                <sliding-modal v-if="sliderActive" @close="deactivateSlider()" @show="redirect()" @navigate="activateNavigation(activeDetail.location)" :text="activeDetail.description" :title="activeDetail.name" :active="sliderActive" :image="activeDetail.image" :showPage="activeGroup == 'facilities' ? false : true"></sliding-modal>
             </transition>
             <transition name="slide" mode="out-in">
                 <navigation-modal v-if="routerActive" @cancel="activateSlider()" :destination="activeDetail.name" :image="activeDetail.image" :time="time" :distance="distance"></navigation-modal>
             </transition>
         </div>
         <transition name="fade" mode="out-in">
-            <popup v-if="showPopup" ref="popup" agree="OK" cancel="Zpět" text="Při této akci se zruší aktuální navigace"></popup>
+            <popup v-if="showPopupMsg" ref="popupmsg" agree="OK" cancel="Zpět" text="Při této akci se zruší aktuální navigace"></popup>
+        </transition>
+        <transition name="fade" mode="out-in">
+            <popup v-if="showPopupErr" ref="popuperr" agree="OK" text="Pro přístup k interaktivní mapě musíte být uvnitř této zoo"></popup>
         </transition>
     </div>
 </template>
@@ -94,7 +97,8 @@ export default {
             },
             sliderActive: false,
             activeDetail: Object,
-            showPopup: false
+            showPopupMsg: false,
+            showPopupErr: false,
         }
     },
     watch: {
@@ -159,17 +163,25 @@ export default {
         },
         checkWhere(){
             if (!this.location || !this.$refs.map.mapObject.getBounds().contains(this.location)){
-                console.log("Nejsi tam");
-            }
+                this.showPopupErr = true;
+                this.$nextTick(async () => {
+                const confirm = await this.$refs.popuperr.generate();
+                    this.showPopupErr = false;
+                    if (confirm === 1) {
+                        this.$router.push('/home');
+                    }
+                });
+            }  
         },
         activateNavigation(destination){
+            const target = polyline(destination).getBounds().getCenter();
             this.sliderActive = false;
             this.routerActive = false;
 
             this.$nextTick(() => {
                 this.waypoints = [
                     L.latLng(this.location.lat, this.location.lng),
-                    L.latLng(destination.lat, destination.lng)
+                    L.latLng(target.lat, target.lng)
                 ];
                 this.router = Routing.mapbox('pk.eyJ1IjoibWFjYW1wMzQiLCJhIjoiY2tpbTFkdnA4MDhyeTJybzVkcTI5ZmpqdSJ9.HY0br03FdYsGSDQRJjx3Rw', { profile:'mapbox/walking' })
                 this.routerActive = true;
@@ -177,11 +189,10 @@ export default {
         },
         activateSlider(item = this.activeDetail){
             if (this.routerActive){
-                this.showPopup = true;
-                this.showPopup = true;
+                this.showPopupMsg = true;
                 this.$nextTick(async () => {
-                    const confirm = await this.$refs.popup.generate();
-                    this.showPopup = false;
+                    const confirm = await this.$refs.popupmsg.generate();
+                    this.showPopupMsg = false;
                     if (confirm === 1) {
                         this.routerActive = false;
                         this.sliderActive = true;
@@ -210,5 +221,7 @@ export default {
         await this.LoadExpositions(this.$route.params.id);
         await this.LoadFacilities(this.$route.params.id);
     },
+
+
 }
 </script>
