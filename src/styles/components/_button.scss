@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 52px;
+    height: 52px;
     border-radius: .75rem;
     padding: 1rem;
     cursor: pointer;
@@ -25,6 +25,11 @@
         fill: $color-white;
         background-color: $color-dark_green;
     }
+
+    &--red{
+        fill: $color-white;
+        background-color: $color-red;
+    }
     
 
     &--texticon{
@@ -40,7 +45,6 @@
     &--active{
         background-color: $color-dark_gray !important;
         fill: $color-light_gray !important;
-    }
-
-    
+        color: $color-light_gray;
+    }    
 }

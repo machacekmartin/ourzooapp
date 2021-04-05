@@ -14,7 +14,7 @@
     import {
         findRealParent
     } from 'vue2-leaflet';
-    const props = {
+    let props = {
         visible: {
             type: Boolean,
             default: true
@@ -88,7 +88,7 @@
             return {
                 parentContainer: null,
                 ready: false,
-                layer: null
+                layer: null,
             }
         },
 
@@ -96,6 +96,13 @@
             this.parentContainer = findRealParent(this.$parent);
             this.add();
             this.ready = true;
+        },
+
+        watch: {
+            waypoints(){
+                this.layer.setWaypoints(this.waypoints);
+                //this.$emit('updateStats', this.layer)
+            },
         },
 
         methods: {
@@ -125,12 +132,17 @@
                         useZoomParameter,
                         showAlternatives,
                         lineOptions,
-                        createMarker
+                        createMarker,
+                        show: false
                     };
                     const { mapObject } = this.parentContainer;
                     const routingLayer = L.Routing.control(options);
                     routingLayer.addTo(mapObject);
                     this.layer = routingLayer;
+
+                    routingLayer.on('routesfound', (layer) => {
+                        this.$emit('updateStats', {distance: layer.routes[0].summary.totalDistance, time: layer.routes[0].summary.totalTime});
+                    })
                 }
             }
         },

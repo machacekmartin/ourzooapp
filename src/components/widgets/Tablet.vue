@@ -1,6 +1,6 @@
 <template>
     <div class="announcement tablet" v-if="data">
-        <h3 class="tablet__title">{{ data.name }}</h3>
+        <h4 class="tablet__title">{{ data.name }}</h4>
         <div class="tablet__content">
             <div class="tablet__text">
                 <p class="tablet__description">{{ data.description }}</p>

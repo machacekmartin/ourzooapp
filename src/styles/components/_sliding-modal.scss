@@ -1,0 +1,78 @@
+.sliding-modal{
+    position: absolute;
+    width: 100%;
+    height: 35%;
+    min-height: 280px;
+    z-index: 1000; 
+    bottom: 0;
+    left: 0;
+    border-radius: 2rem 2rem 0 0;
+    padding: 1rem 1.5rem;
+    @include glass($color-light_gray, .6, .85rem);
+    @include shadow;
+    @include transition;
+
+    &__header{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    &__close{
+        background: $color-white;
+        fill: $color-dark_gray;
+        height: 45px;
+        width: 45px;
+        padding: 1rem;
+    }
+
+    &__text{
+        position: relative;
+        max-height: calc(3 * 15px * 1.5);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+    }
+
+    &__body{
+        margin-top: 1rem;
+    }
+
+    &__image{
+        position: absolute;
+        top: -70px;
+        left: 1.5rem;
+        width: 40%;
+        height: 135px;        
+        border-radius: .8rem;
+        object-fit: cover;
+        @include shadow-min-dark;
+    }
+
+    &__buttons{
+        display: flex;
+        margin-top: .75rem;
+    }
+
+    &__button{
+        margin-right: 1rem;
+        &--text{
+            background: $color-white;
+            
+            width: auto;
+            font-weight: 600;
+        
+            & > .icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        &--lb{
+            background: $color-light_blue;
+            fill: $color-white;
+        }
+    }
+}

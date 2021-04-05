@@ -36,7 +36,9 @@
 @import './components/_loading';
 @import './components/_input';
 @import './components/_switch';
-
+@import './components/_sliding-modal';
+@import './components/_navigation-modal';
+@import './components/_popup';
 
 #app{
     min-height: 100vh; 
@@ -72,9 +74,19 @@
     }
 }
 .fade-enter, .fade-leave-to{
-    
     opacity: 0;
 }
 .fade-enter-active, .fade-leave-active{
     transition: .175s ease-in-out;
+}
+
+.slide-enter, .slide-leave-to{
+    transform: translateY(calc(100% + 75px));
+}
+.slide-enter-active, .slide-leave-active{
+    transition: .5s;
+}
+
+.leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
 }
