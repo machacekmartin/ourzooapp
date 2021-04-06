@@ -1,10 +1,10 @@
-<template>
-    <div class="page" style="overflow: hidden">
+<template >
+    <div class="page" style="overflow: hidden" v-if="zoo && species && expositions && facilities">
         <heading type="single"></heading>
-        <div class="map" v-if="zoo && species">
-            <l-map ref="map" @ready="checkWhere" :options="{ zoomControl: false }" :bounds="zoo.location.length > 1 ? zoo.location : maxBounds">
+        <div class="map">
+            <l-map ref="map" :options="{ zoomControl: false }" :bounds="zoo.location.length > 1 ? zoo.location : maxBounds">
                 <l-tile-layer :url="tiles"></l-tile-layer>
-                <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions"></l-routing-machine>
+                <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="true"></l-routing-machine>
                 
                 <div v-for="item in currentFilterGroup" :key="item._id">
                     <template v-if="shouldBePolygon(item.location)">
@@ -26,22 +26,24 @@
                     </l-marker>
                 </div>
 
-                <l-marker v-if="location" :lat-lng="location">
+                <l-marker v-if="location" :lat-lng="location" ref="user">
                     <l-icon :icon-size="[24,24]" :icon-anchor="[12,12]" class-name="map__user-marker">
                         <div class="map__user-icon"></div>
                     </l-icon>
                 </l-marker>
-                
             </l-map>
+
             <div class="map__filters">
-                <custom-button class="map__filter" :class="activeGroup == filter ? 'map__filter--active' : ''" v-for="filter in filters" @clicked="switchFilter(filter)" :key="filter" :icon="filter"></custom-button>
+                <custom-button class="map__button" :class="activeGroup == filter ? 'map__button--active' : ''" v-for="filter in filters" @clicked="switchFilter(filter)" :key="filter" :icon="filter"></custom-button>
             </div>
+            <custom-button class="map__locate" @clicked="focusOnUser()" icon="location"></custom-button>
             <transition name="slide" mode="out-in">
                 <sliding-modal v-if="sliderActive" @close="deactivateSlider()" @show="redirect()" @navigate="activateNavigation(activeDetail.location)" :text="activeDetail.description" :title="activeDetail.name" :active="sliderActive" :image="activeDetail.image" :showPage="activeGroup == 'facilities' ? false : true"></sliding-modal>
             </transition>
             <transition name="slide" mode="out-in">
                 <navigation-modal v-if="routerActive" @cancel="activateSlider()" :destination="activeDetail.name" :image="activeDetail.image" :time="time" :distance="distance"></navigation-modal>
             </transition>
+            
         </div>
         <transition name="fade" mode="out-in">
             <popup v-if="showPopupMsg" ref="popupmsg" agree="OK" cancel="Zpět" text="Při této akci se zruší aktuální navigace"></popup>
@@ -49,20 +51,19 @@
         <transition name="fade" mode="out-in">
             <popup v-if="showPopupErr" ref="popuperr" agree="OK" text="Pro přístup k interaktivní mapě musíte být uvnitř této zoo"></popup>
         </transition>
+        
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { latLngBounds, polyline, Routing } from 'leaflet';
+import { latLngBounds, polyline, Routing, latLng } from 'leaflet';
 import 'leaflet-routing-machine';
 import { LMap, LTileLayer, LMarker, LIcon, LControl, LPolygon} from 'vue2-leaflet';
 import LRoutingMachine from '@/components/LRoutingMachine.vue'
-
 import Heading from '@/components/Heading.vue';
 import SlidingModal from '@/components/SlidingModal.vue';
 import NavigationModal from '@/components/NavigationModal.vue';
-
 import Popup from '@/components/Popup.vue';
 
 export default {
@@ -83,7 +84,7 @@ export default {
     data(){
         return{
             routerActive: false,
-            tiles: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            tiles: 'https://api.mapbox.com/styles/v1/macamp34/ckn647j0d16lj17s22aqrrgaf/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWFjYW1wMzQiLCJhIjoiY2tpbTBnMmJiMDhjbzJ5cHNvaHdvenZpaSJ9.hII79F6P8oxwo5xxlPybIA',
             filters: [
                 'species',
                 'expositions',
@@ -93,7 +94,7 @@ export default {
             waypoints: null,
             router: null,
             lineOptions: {
-                styles: [{color: 'black', opacity: 1, weight: 5}]
+                styles: [{color: '#005343', opacity: 1, weight: 4}]
             },
             sliderActive: false,
             activeDetail: Object,
@@ -105,7 +106,7 @@ export default {
         location(){
             if (this.router){
                 this.waypoints = [
-                    L.latLng(this.location.lat, this.location.lng),
+                    latLng(this.location.lat, this.location.lng),
                     this.waypoints[1]
                 ];
             }
@@ -122,7 +123,7 @@ export default {
             return this.activeDetail.distance;
         },
         time(){
-            return this.activeDetail.time
+            return this.activeDetail.time;
         },
         currentFilterGroup(){
             switch(this.activeGroup){
@@ -161,17 +162,24 @@ export default {
         getCenterOfPolygon(polygon){
             return polyline(polygon).getBounds().getCenter();
         },
-        checkWhere(){
+        initialLoad(){
             if (!this.location || !this.$refs.map.mapObject.getBounds().contains(this.location)){
-                this.showPopupErr = true;
+                /*this.showPopupErr = true;
                 this.$nextTick(async () => {
                 const confirm = await this.$refs.popuperr.generate();
                     this.showPopupErr = false;
                     if (confirm === 1) {
                         this.$router.push('/home');
                     }
-                });
+                });*/
             }  
+            if (this.$route.query.type && this.$route.query.target){
+                this.activeGroup = this.$route.query.type;
+                const source = this.currentFilterGroup; 
+                const target = source.find(item => item._id === this.$route.query.target);
+                this.activateSlider(target);
+            }
+            
         },
         activateNavigation(destination){
             const target = polyline(destination).getBounds().getCenter();
@@ -180,10 +188,10 @@ export default {
 
             this.$nextTick(() => {
                 this.waypoints = [
-                    L.latLng(this.location.lat, this.location.lng),
-                    L.latLng(target.lat, target.lng)
+                    latLng(this.location.lat, this.location.lng),
+                    latLng(target.lat, target.lng)
                 ];
-                this.router = Routing.mapbox('pk.eyJ1IjoibWFjYW1wMzQiLCJhIjoiY2tpbTFkdnA4MDhyeTJybzVkcTI5ZmpqdSJ9.HY0br03FdYsGSDQRJjx3Rw', { profile:'mapbox/walking' })
+                this.router = Routing.mapbox('pk.eyJ1IjoibWFjYW1wMzQiLCJhIjoiY2tpbTBnMmJiMDhjbzJ5cHNvaHdvenZpaSJ9.hII79F6P8oxwo5xxlPybIA', { profile:'mapbox/walking' })
                 this.routerActive = true;
             });
         },
@@ -214,14 +222,19 @@ export default {
             this.$set(this.activeDetail, 'time', stats.time);
             this.$set(this.activeDetail, 'distance', stats.distance);
         },
+        focusOnUser(){
+            this.$refs.map.mapObject.setView(this.location, 50);
+        }
     },
-    async created(){
+    async mounted(){
         await this.LoadZoo(this.$route.params.id);
         await this.LoadSpecies(this.$route.params.id);
         await this.LoadExpositions(this.$route.params.id);
         await this.LoadFacilities(this.$route.params.id);
-    },
 
-
+        this.$nextTick(() => {
+            this.initialLoad();
+        })
+    }
 }
 </script>

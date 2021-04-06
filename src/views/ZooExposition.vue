@@ -4,7 +4,7 @@
         <div class="page__header">
             <img class="page__background" :src="'https://ourzoo.eu/assets/images/medium/'+ exposition.image" :alt="exposition.name">
             <div class="page__buttons">
-                <custom-button class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
+                <custom-button @clicked="$router.push('/zoo/'+ exposition.zooId +'/map?type=expositions&target=' + exposition._id)" class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
                 <custom-button type="dgreen" icon="location"></custom-button>
             </div>
         </div>
@@ -24,6 +24,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { polyline } from 'leaflet';
 import GalleryWidget from '@/components/widgets/Gallery.vue';
 import ListWidget from '@/components/widgets/List.vue';
 import Heading from '@/components/Heading.vue'
@@ -38,7 +39,7 @@ export default {
         ...mapActions('expositions', ['LoadExposition'])
     },
     computed: {
-        ...mapGetters('expositions', ['exposition'])
+        ...mapGetters('expositions', ['exposition']),
     },
     async created(){
         await this.LoadExposition(this.$route.params.detailId);

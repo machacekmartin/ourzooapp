@@ -21,7 +21,7 @@
                 </div>
                 <div class="page__detail">
                     <span class="page__detail__icon">
-                        <icon icon="species"></icon>
+                        <icon icon="location"></icon>
                     </span>
                     <h4>Adresa: <a :href="'https://maps.google.com/?q='+zoo.address" target="__blank" class="page__detail__small page__detail__link">{{ zoo.address }}</a></h4> 
                 </div>

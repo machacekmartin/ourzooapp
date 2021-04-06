@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import L from 'leaflet'
+    import { Routing } from 'leaflet'
     import {
         IRouter,
         IGeocoder,
@@ -27,7 +27,7 @@
             type: IRouter
         },
         plan: {
-            type: L.Routing.Plan
+            type: Routing.Plan
         },
         geocoder: {
             type: IGeocoder
@@ -136,7 +136,7 @@
                         show: false
                     };
                     const { mapObject } = this.parentContainer;
-                    const routingLayer = L.Routing.control(options);
+                    const routingLayer = Routing.control(options);
                     routingLayer.addTo(mapObject);
                     this.layer = routingLayer;
 

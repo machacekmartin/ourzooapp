@@ -37,10 +37,9 @@ export default {
                 this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
             }, err => {
                 alert(err.message);
-            }, { enableHighAccuracy: true, maximumAge: 1000 })
+            }, { enableHighAccuracy: true })
 
             navigator.geolocation.watchPosition(succ => {
-                console.log("Hey, you moved!", succ.coords.latitude, succ.coords.longitude);
                 if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
                     this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
                 }

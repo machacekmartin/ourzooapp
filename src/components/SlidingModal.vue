@@ -10,7 +10,7 @@
                 {{ text }}
             </p>
             <div class="sliding-modal__buttons">
-                <custom-button @clicked="$emit('navigate')" icon="life" class="sliding-modal__button sliding-modal__button--lb"></custom-button>
+                <custom-button @clicked="$emit('navigate')" icon="locate" class="sliding-modal__button sliding-modal__button--lb"></custom-button>
                 <custom-button v-if="showPage" @clicked="$emit('show')" icon="arrow" text="Zobrazit více" class="sliding-modal__button sliding-modal__button--text" type="texticon"></custom-button>            
             </div>
         </div>

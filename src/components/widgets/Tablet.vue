@@ -1,5 +1,5 @@
 <template>
-    <div class="announcement tablet" v-if="data">
+    <router-link class="announcement tablet" v-if="data" :to="{ name: link, params: { id: zoo._id } }">
         <h4 class="tablet__title">{{ data.name }}</h4>
         <div class="tablet__content">
             <div class="tablet__text">
@@ -8,9 +8,9 @@
                 <span>{{ date }} {{ time }}</span> 
                 </p>
             </div>
-            <custom-button @clicked="$router.push({ name: link, params: { id: zoo._id } })" class="tablet__button" icon="announcements"></custom-button>
+            <custom-button class="tablet__button" icon="announcements"></custom-button>
         </div>
-    </div>
+    </router-link>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
