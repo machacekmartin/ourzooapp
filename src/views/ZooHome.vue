@@ -27,9 +27,10 @@
             </div>
             <list-widget :items="limitedExpositions" link="Zoo Exposition"></list-widget>
         </div>
-        <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t padding--lg-b">
+        <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
             <h3>Všechny expozice</h3>
         </router-link>
+        <events-widget class="margin--t padding--h padding--lg-b" v-if="events && currentDate" title="Plán na dnešní den" :items="todayEvents" size="small" :redirect="true"></events-widget>
     </div>
 </template>
 
@@ -39,6 +40,7 @@ import TabletWidget from '@/components/widgets/Tablet.vue';
 import HorizontalSliderWidget from '@/components/widgets/HorizontalSlider.vue';
 import BannerWidget from '@/components/widgets/Banner.vue';
 import ListWidget from '@/components/widgets/List.vue';
+import EventsWidget from '@/components/widgets/Events.vue';
 import Heading from '@/components/Heading.vue';
 
 export default {
@@ -48,11 +50,13 @@ export default {
         HorizontalSliderWidget,
         BannerWidget,
         ListWidget,
+        EventsWidget,
         Heading
     },
     data(){
         return{
             currentLocation: null,
+            currentDate: (new Date()).setHours(0,0,0,0)
         }
     },
     computed: {
@@ -60,6 +64,7 @@ export default {
         ...mapGetters('announcements', ['latestAnnouncement']),
         ...mapGetters('species', ['species', 'speciesSortedByDistance']),
         ...mapGetters('expositions', ['expositions', 'expositionsSortedByDistance']),
+        ...mapGetters('events', ['events', 'todayEvents']),
         ...mapGetters('location', ['location']),
 
         limitedSpecies(){
@@ -67,19 +72,21 @@ export default {
         },
         limitedExpositions(){
             return this.expositionsSortedByDistance.slice(0,5);
-        }
+        },
     },
     methods: {
         ...mapActions('zoos', ['LoadZoo', 'ResetZoo']),
         ...mapActions('announcements', ['LoadLatestAnnouncement', 'ResetLatestAnnouncement']),
         ...mapActions('species', ['LoadSpecies', 'ResetSpecies']),
         ...mapActions('expositions', ['LoadExpositions', 'ResetExpositions']),
+        ...mapActions('events', ['LoadEvents']),
     },
     async created(){
         await this.LoadZoo(this.$route.params.id);
         await this.LoadLatestAnnouncement(this.$route.params.id);
         await this.LoadSpecies(this.$route.params.id);
         await this.LoadExpositions(this.$route.params.id);
+        await this.LoadEvents(this.$route.params.id);
     },
     beforeDestroy(){
         this.ResetZoo();

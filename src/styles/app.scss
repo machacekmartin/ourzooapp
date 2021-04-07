@@ -29,6 +29,7 @@
 @import './components/_list';
 @import './components/_gallery';
 @import './components/_timeline';
+@import './components/_calendar';
 
 @import './components/_text-link';
 
@@ -85,6 +86,13 @@
 }
 .slide-enter-active, .slide-leave-active{
     transition: .5s;
+}
+
+.slidetop-enter, .slidetop-leave-to{
+    transform: translateY(-100%);
+}
+.slidetop-enter-active, .slidetop-leave-active{
+    transition: .25s;
 }
 
 .leaflet-control-container .leaflet-routing-container-hide {

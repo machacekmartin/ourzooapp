@@ -9,6 +9,7 @@ import announcements from './modules/announcements';
 import species from './modules/species';
 import expositions from './modules/expositions';
 import facilities from './modules/facilities';
+import events from './modules/events';
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         announcements,
         species,
         expositions,
-        facilities
+        facilities,
+        events
     }
 })

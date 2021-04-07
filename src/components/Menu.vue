@@ -26,7 +26,7 @@
                 <p class="menu__text">Naše expozice</p>
             </router-link>
 
-            <router-link class="menu__item" :to="{ name: 'Zoo Species', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
+            <router-link class="menu__item" :to="{ name: 'Zoo Events', params: { id: zoo._id } }" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon">
                     <icon icon="events"></icon>
                 </span>
@@ -46,7 +46,6 @@
                 <p class="menu__text">O naší zoo</p>
             </router-link>
         </div>
-
         <div class="menu__footer">
             <router-link class="menu__item" to="/home" v-on:click.native="UpdateIsActive(false)">
                 <span class="menu__icon menu__icon--sm">

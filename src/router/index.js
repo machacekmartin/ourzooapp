@@ -9,7 +9,7 @@ import ZooSpecies from '../views/ZooSpecies.vue'
 import ZooOneSpecies from '../views/ZooOneSpecies.vue'
 import ZooExpositions from '../views/ZooExpositions.vue'
 import ZooExposition from '../views/ZooExposition.vue'
-
+import ZooEvents from '../views/ZooEvents.vue'
 import ZooAnnouncements from '../views/ZooAnnouncements.vue'
 import ZooInfo from '../views/ZooInfo.vue'
 
@@ -63,6 +63,11 @@ const routes = [
         path: '/zoo/:id/announcements',
         name: 'Zoo Announcements',
         component: ZooAnnouncements
+    },
+    {
+        path: '/zoo/:id/events',
+        name: 'Zoo Events',
+        component: ZooEvents
     },
     {
         path: '/zoo/:id/info',
