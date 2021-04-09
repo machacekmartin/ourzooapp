@@ -39,18 +39,21 @@ export default {
     created(){
         document.addEventListener('deviceready', (success) => {
             navigator.geolocation.getCurrentPosition(succ => {
-                this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
+                this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude})
+
+                navigator.geolocation.watchPosition(succ => {
+                    if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
+                        this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
+                    }
+                }, err => {
+                alert(err.message);
+                }, { enableHighAccuracy: true, maximumAge: 30000 });
+                
             }, err => {
                 alert(err.message);
             }, { enableHighAccuracy: true })
 
-            navigator.geolocation.watchPosition(succ => {
-                if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
-                    this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
-                }
-            }, err => {
-                alert(err.message);
-            }, { enableHighAccuracy: true, maximumAge: 30000 });
+            
         })
     }
 }

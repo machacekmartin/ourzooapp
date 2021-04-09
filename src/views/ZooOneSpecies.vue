@@ -45,7 +45,7 @@
                             <custom-button v-else @clicked="updateIsPlaying(false)" type="dgreen" icon="pause"></custom-button>
                         </template>
                         <template v-else>
-                            <custom-button @clicked="setTarget(oneSpecies); updateIsPlaying(true)" type="dgreen" icon="play"></custom-button>
+                            <custom-button @clicked="setTarget(oneSpecies)" type="dgreen" icon="play"></custom-button>
                         </template>
                     </template>
                 </div>

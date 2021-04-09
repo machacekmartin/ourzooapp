@@ -7,7 +7,6 @@
                 <span class="audio-player__path" :style="'width: '+ percentage + '%'"></span>
                 <span class="audio-player__circle" :style="'left: '+ percentage +'%'"></span>
             </div>
-            
         </div>
         <div class="audio-player__controls">
             <custom-button v-if="isPlaying" @clicked="pause()" class="audio-player__button button--dgreen" icon="pause"></custom-button>
@@ -78,6 +77,8 @@ export default {
             });
 
             this.player.play();
+            this.resume();
+            
         }
     },
     async mounted(){
