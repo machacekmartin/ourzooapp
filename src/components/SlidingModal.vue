@@ -1,5 +1,5 @@
 <template>
-    <div class="sliding-modal" :class="active ? 'sliding-modal--active' : ''">
+    <div class="sliding-modal" :class="[active ? 'sliding-modal--active' : '', target ? 'sliding-modal--audio-active' : '']">
         <div class="sliding-modal__header">
             <img v-if="image" class="sliding-modal__image" :src="'https://ourzoo.eu/assets/images/large/'+ image"  alt="image">
             <custom-button @clicked="$emit('close')" icon="cross" class="sliding-modal__close"></custom-button>
@@ -11,22 +11,18 @@
             </p>
             <div class="sliding-modal__buttons">
                 <custom-button @clicked="$emit('navigate')" icon="locate" class="sliding-modal__button sliding-modal__button--lb"></custom-button>
-                <custom-button v-if="showPage" @clicked="$emit('show')" icon="arrow" text="Zobrazit více" class="sliding-modal__button sliding-modal__button--text" type="texticon"></custom-button>            
+                <custom-button v-if="showPage" @clicked="$emit('show')" icon="arrow" text="Zobrazit více" class="sliding-modal__button sliding-modal__button--text" type="texticon"></custom-button> 
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
     export default {
         props: ['active', 'image', 'title', 'text', 'group', 'showPage'],
-        data(){
-            return {
-                
-            }
-        },
-        methods: {
-            
+        computed: {
+            ...mapGetters('audio', ['target'])
         }
     };
 

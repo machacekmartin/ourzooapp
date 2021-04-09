@@ -1,5 +1,5 @@
 .sliding-modal{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 35%;
     min-height: 280px;
@@ -12,6 +12,10 @@
     @include glass($color-light_gray, .6, .85rem);
     @include shadow;
     @include transition;
+
+    &--audio-active{
+        bottom: 6rem;
+    }
 
     &__header{
         display: flex;

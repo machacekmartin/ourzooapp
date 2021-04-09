@@ -51,7 +51,6 @@
         <transition name="fade" mode="out-in">
             <popup v-if="showPopupErr" ref="popuperr" agree="OK" text="Pro přístup k interaktivní mapě musíte být uvnitř této zoo"></popup>
         </transition>
-        
     </div>
 </template>
 
@@ -118,6 +117,7 @@ export default {
         ...mapGetters('expositions', ['expositions']),
         ...mapGetters('facilities', ['facilities']),
         ...mapGetters('location', ['location']),
+        
 
         distance(){
             return this.activeDetail.distance;

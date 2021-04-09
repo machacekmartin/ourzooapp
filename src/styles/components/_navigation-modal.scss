@@ -1,5 +1,5 @@
 .navigation-modal{
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     width: 100%;
@@ -12,6 +12,10 @@
     @include glass($color-light_gray, .6, .85rem);
     @include shadow;
     @include transition;
+
+    &--audio-active{
+        bottom: 6rem;
+    }
 
     &__image{
         width: 60px;

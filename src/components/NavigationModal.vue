@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation-modal" :class="active ? 'navigation-modal--active' : ''">
+    <div class="navigation-modal" :class="[active ? 'navigation-modal--active' : '', target ? 'navigation-modal--audio-active' : '']" >
         <img class="navigation-modal__image" :src="'https://ourzoo.eu/assets/images/small/'+ image"  alt="image">
         <div class="navigation-modal__detail">
             <h4 class="navigation-modal__title">{{ destination }}</h4>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
     export default {
         props: ['active', 'image', 'destination', 'time', 'distance'],
         data(){
@@ -27,8 +28,8 @@
                 
             }
         },
-        methods: {
-            
+        computed: {
+            ...mapGetters('audio', ['target'])
         }
     };
 </script>

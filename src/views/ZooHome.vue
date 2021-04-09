@@ -30,7 +30,7 @@
         <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
             <h3>Všechny expozice</h3>
         </router-link>
-        <events-widget class="margin--t padding--h padding--lg-b" v-if="events && currentDate" title="Plán na dnešní den" :items="todayEvents" size="small" :redirect="true"></events-widget>
+        <events-widget class="margin--t padding--h padding--lg-b" v-if="events && todayEvents.length && currentDate" title="Plán na dnešní den" :items="todayEvents" size="small" :redirect="true"></events-widget>
     </div>
 </template>
 

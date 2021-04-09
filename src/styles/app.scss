@@ -30,6 +30,7 @@
 @import './components/_gallery';
 @import './components/_timeline';
 @import './components/_calendar';
+@import './components/_audio-player';
 
 @import './components/_text-link';
 
@@ -43,9 +44,14 @@
 
 #app{
     min-height: 100vh; 
-    overflow-x: hidden; 
+    overflow-x: auto;
 }
 .app{
+    $self: &;
+    &--menu-active{
+        overflow-x: hidden;
+    
+    }
     &__page{
         position: relative;
         min-height: 100vh;
@@ -86,7 +92,7 @@
 }
 
 .slide-enter, .slide-leave-to{
-    transform: translateY(calc(100% + 75px));
+    transform: translateY(calc(200%));
 }
 .slide-enter-active, .slide-leave-active{
     transition: .5s;

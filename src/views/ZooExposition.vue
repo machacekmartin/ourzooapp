@@ -5,7 +5,15 @@
             <img class="page__background" :src="'https://ourzoo.eu/assets/images/medium/'+ exposition.image" :alt="exposition.name">
             <div class="page__buttons">
                 <custom-button @clicked="$router.push('/zoo/'+ exposition.zooId +'/map?type=expositions&target=' + exposition._id)" class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
-                <custom-button type="dgreen" icon="location"></custom-button>
+                <template v-if="exposition.audio">
+                    <template v-if="target === exposition">
+                        <custom-button v-if="!isPlaying" @clicked="updateIsPlaying(true)" type="dgreen" icon="play"></custom-button>
+                        <custom-button v-else @clicked="updateIsPlaying(false)" type="dgreen" icon="pause"></custom-button>
+                    </template>
+                    <template v-else>
+                        <custom-button @clicked="setTarget(exposition)" type="dgreen" icon="play"></custom-button>
+                    </template>
+                </template>
             </div>
         </div>
         <div class="page__body padding--h padding--lg-t">
@@ -36,10 +44,13 @@ export default {
         Heading
     },
     methods: {
-        ...mapActions('expositions', ['LoadExposition'])
+        ...mapActions('expositions', ['LoadExposition']),
+        ...mapActions('audio', ['setTarget', 'updateIsPlaying'])
     },
     computed: {
         ...mapGetters('expositions', ['exposition']),
+        ...mapGetters('audio', ['target', 'isPlaying']),
+        
     },
     async created(){
         await this.LoadExposition(this.$route.params.detailId);

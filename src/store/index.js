@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import menu from './modules/menu';
+import audio from './modules/audio';
+
 import permissions from './modules/permissions';
 import location from './modules/location';
 import zoos from './modules/zoos';
@@ -16,6 +18,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
         menu,
+        audio,
         permissions,
         location,
         zoos,
