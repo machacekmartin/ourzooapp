@@ -44,13 +44,12 @@
 
 #app{
     min-height: 100vh; 
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 .app{
     $self: &;
     &--menu-active{
         overflow-x: hidden;
-    
     }
     &__page{
         position: relative;

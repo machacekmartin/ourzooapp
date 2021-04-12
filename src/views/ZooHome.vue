@@ -1,5 +1,5 @@
 <template>
-    <div class="page margin--b" v-if="zoo && species && expositions && latestAnnouncement">
+    <div class="page margin--b" v-if="zoo">
         <heading type="triple" :title="zoo.name" ></heading>
         <div class="widget margin--t margin--h">
             <div class="widget__header margin--sm-b">
@@ -25,7 +25,7 @@
             <div class="widget__header margin--sm-b">
                 <h3>Nejbližší expozice</h3>
             </div>
-            <list-widget :items="limitedExpositions" link="Zoo Exposition"></list-widget>
+            <list-widget v-if="limitedExpositions" :items="limitedExpositions" link="Zoo Exposition"></list-widget>
         </div>
         <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
             <h3>Všechny expozice</h3>

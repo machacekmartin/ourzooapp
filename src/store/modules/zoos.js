@@ -1,5 +1,6 @@
 import { http } from "@/services/axios";
 import { assignDistances } from "@/services/distance";
+import { sortByDistance } from "@/services/sort";
 
 const state = {
     zoos: null,
@@ -12,10 +13,8 @@ const getters = {
         const currentLocation = rootGetters['location/location'];
         if (currentLocation){
             let zoosWithDistances = assignDistances(state.zoos, currentLocation);
-            
-            return zoosWithDistances.sort((a, b) => {
-                return a.distance - b.distance;
-            });
+
+            return sortByDistance(zoosWithDistances);
         }
         else{
             return state.zoos;

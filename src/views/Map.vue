@@ -1,8 +1,8 @@
 <template >
-    <div class="page" style="overflow: hidden" v-if="zoo && species && expositions && facilities">
+    <div class="page" style="overflow: hidden" v-if="zoo">
         <heading type="single"></heading>
         <div class="map">
-            <l-map ref="map" :options="{ zoomControl: false }" :bounds="zoo.location.length > 1 ? zoo.location : maxBounds">
+            <l-map ref="map" :options="{ zoomControl: false }" :bounds="zoo.location && zoo.location.length > 1 ? zoo.location : maxBounds">
                 <l-tile-layer :url="tiles"></l-tile-layer>
                 <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="true"></l-routing-machine>
                 
@@ -88,6 +88,10 @@ export default {
                 'species',
                 'expositions',
                 'facilities'
+            ],
+            maxBounds: [
+                latLng(51.047135697570226, 11.81109207374366),
+                latLng(48.66282915025471, 18.619809934061617)
             ],
             activeGroup: 'species',
             waypoints: null,

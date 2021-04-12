@@ -1,5 +1,6 @@
 import { http } from "@/services/axios";
 import { assignDistances } from "@/services/distance";
+import { sortByDistance } from "@/services/sort";
 
 const state = {
     expositions: [],
@@ -12,10 +13,7 @@ const getters = {
         const currentLocation = rootGetters['location/location'];
         if (currentLocation){
             let expositionsWithDistances = assignDistances(state.expositions, currentLocation);
-            
-            return expositionsWithDistances.sort((a, b) => {
-                return a.distance - b.distance;
-            });
+            return sortByDistance(expositionsWithDistances);
         }
         else{
             return state.expositions;

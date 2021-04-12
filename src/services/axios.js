@@ -9,5 +9,5 @@ export const http = axios.create({
     baseURL: 'https://ourzoo.eu',
 	//headers: { 'Cache-Control': 'no-cache'},
 	// cache will be enabled by default
-	//adapter: cache.adapter
+	adapter: cache.adapter
 });

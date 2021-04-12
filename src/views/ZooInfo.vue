@@ -40,7 +40,7 @@
             </div>    
         </div>
 
-    <div class="widget margin--t padding--h padding--lg-b" v-if="zoo && zoo.location">
+    <div class="widget margin--t padding--h padding--lg-b" v-if="zoo">
         <div class="widget__header margin--sm-b">
             <h3>Mapa zoo</h3>
         </div>
