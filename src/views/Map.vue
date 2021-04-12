@@ -6,7 +6,7 @@
                 <l-tile-layer :url="tiles"></l-tile-layer>
                 <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="true"></l-routing-machine>
                 
-                <div v-for="item in currentFilterGroup" :key="item._id">
+                <div v-for="item in currentFilterGroup" :key="item._id" v-if="item.location && item.location.length">
                     <template v-if="shouldBePolygon(item.location)">
                         <l-polygon :lat-lngs="item.location" color="green" ></l-polygon>
                         <l-marker :lat-lng="getCenterOfPolygon(item.location)" @click="activateSlider(item)">
