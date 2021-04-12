@@ -11,7 +11,7 @@
             <div class="widget__header margin--h margin--sm-b">
                 <h3>Nejbližší zvířata v této zoo</h3>
             </div>
-            <horizontal-slider-widget v-if="limitedSpecies" :data="limitedSpecies" link="Zoo One Species"></horizontal-slider-widget>
+            <horizontal-slider-widget v-if="speciesSortedByDistance" :data="limitedSpecies" link="Zoo One Species"></horizontal-slider-widget>
         </div>
         <router-link :to="{ name: 'Zoo Species', params: { id: zoo._id } }" class="text-link margin--t">
             <h3>Všechna zvířata</h3>
@@ -25,12 +25,12 @@
             <div class="widget__header margin--sm-b">
                 <h3>Nejbližší expozice</h3>
             </div>
-            <list-widget v-if="limitedExpositions" :items="limitedExpositions" link="Zoo Exposition"></list-widget>
+            <list-widget v-if="expositionsSortedByDistance" :items="limitedExpositions" link="Zoo Exposition"></list-widget>
         </div>
         <router-link :to="{ name: 'Zoo Expositions', params: { id: zoo._id } }" class="text-link margin--sm-t">
             <h3>Všechny expozice</h3>
         </router-link>
-        <events-widget class="margin--t padding--h padding--lg-b" v-if="events && todayEvents.length && currentDate" title="Plán na dnešní den" :items="todayEvents" size="small" :redirect="true"></events-widget>
+        <events-widget class="margin--t padding--h padding--lg-b" v-if="todayEvents.length && currentDate" title="Plán na dnešní den" :items="todayEvents" size="small" :redirect="true"></events-widget>
     </div>
 </template>
 
@@ -62,9 +62,9 @@ export default {
     computed: {
         ...mapGetters('zoos', ['zoo']),
         ...mapGetters('announcements', ['latestAnnouncement']),
-        ...mapGetters('species', ['species', 'speciesSortedByDistance']),
-        ...mapGetters('expositions', ['expositions', 'expositionsSortedByDistance']),
-        ...mapGetters('events', ['events', 'todayEvents']),
+        ...mapGetters('species', ['speciesSortedByDistance']),
+        ...mapGetters('expositions', ['expositionsSortedByDistance']),
+        ...mapGetters('events', ['todayEvents']),
         ...mapGetters('location', ['location']),
 
         limitedSpecies(){
