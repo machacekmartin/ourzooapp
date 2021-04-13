@@ -2,15 +2,15 @@
     <div class="page" style="overflow: hidden" v-if="zoo">
         <heading type="single"></heading>
         <div class="map">
-            <l-map ref="map" :options="{ zoomControl: false }" :bounds="zoo.location && zoo.location.length > 1 ? zoo.location : maxBounds">
-                <l-tile-layer :url="tiles"></l-tile-layer>
+            <l-map ref="map" :options="{ zoomControl: false}" :bounds="zoo.location && zoo.location.length > 1 ? zoo.location : maxBounds">
+                <l-tile-layer :url="tiles" :options="{ maxZoom: 20}"></l-tile-layer>
                 <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="true"></l-routing-machine>
                 
                 <div v-for="item in currentFilterGroup" :key="item._id" v-if="item.location && item.location.length">
                     <template v-if="shouldBePolygon(item.location)">
-                        <l-polygon :lat-lngs="item.location" color="green" ></l-polygon>
+                        <l-polygon :lat-lngs="item.location" color="green" fillColor="green" :opacity="0.1" :weight="3"></l-polygon>
                         <l-marker :lat-lng="getCenterOfPolygon(item.location)" @click="activateSlider(item)">
-                            <l-icon :icon-size="[56, 50]" :icon-anchor="[28, 50]" :class-name="'map__marker map__marker--' + activeGroup">
+                            <l-icon :icon-size="[50, 42]" :icon-anchor="[25, 42]" :class-name="'map__marker map__marker--' + activeGroup">
                                 <div class="map__icon">
                                     <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
                                 </div>
@@ -18,7 +18,7 @@
                         </l-marker>
                     </template>
                     <l-marker v-else :lat-lng="item.location[0]" @click="activateSlider(item)">
-                        <l-icon :icon-size="[56, 50]" :icon-anchor="[28, 50]" :class-name="'map__marker map__marker--' + activeGroup">
+                        <l-icon :icon-size="[50, 42]" :icon-anchor="[25, 42]" :class-name="'map__marker map__marker--' + activeGroup">
                             <div class="map__icon" :class="'map__icon--' + activeGroup">
                                 <img class="map__image" :src="'https://ourzoo.eu/assets/images/tiny/'+ item.image" :alt="item.name">
                             </div>

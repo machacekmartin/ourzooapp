@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="page__buttons">
-                    <custom-button @clicked="$router.push('/zoo/'+ oneSpecies.zooId +'/map?type=species&target=' + oneSpecies._id)" class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
+                    <custom-button v-if="oneSpecies.location && oneSpecies.location.length" @clicked="$router.push('/zoo/'+ oneSpecies.zooId +'/map?type=species&target=' + oneSpecies._id)" class="button--texticon page__button" type="lblue" text="Najít na mapě" icon="location"></custom-button>
                     <template v-if="oneSpecies.audio">
                         <template v-if="target === oneSpecies">
                             <custom-button v-if="!isPlaying" @clicked="updateIsPlaying(true)" type="dgreen" icon="play"></custom-button>
@@ -60,7 +60,7 @@
 
             <div class="padding--t padding--h padding--lg-b">
                 <h3>Příslušná expozice</h3>
-                <list-widget :items="[oneSpecies.exposition]" link="Zoo Exposition" size="small"></list-widget>
+                <list-widget v-if="oneSpecies.exposition" :items="[oneSpecies.exposition]" link="Zoo Exposition" size="small"></list-widget>
             </div>
         </div>
     </div>
@@ -83,12 +83,16 @@ export default {
         ...mapGetters('audio', ['target', 'isPlaying'])
     },
     methods: {
-        ...mapActions('species', ['LoadOneSpecies']),
+        ...mapActions('species', ['LoadOneSpecies', 'ResetOneSpecies']),
         ...mapActions('audio', ['setTarget', 'updateIsPlaying'])
 
     },
     async created(){
         await this.LoadOneSpecies(this.$route.params.detailId);
+    },
+    
+    beforeDestroy(){
+        this.ResetOneSpecies();
     }
 }
 </script>

@@ -44,7 +44,7 @@ export default {
         Heading
     },
     methods: {
-        ...mapActions('expositions', ['LoadExposition']),
+        ...mapActions('expositions', ['LoadExposition', 'ResetExposition']),
         ...mapActions('audio', ['setTarget', 'updateIsPlaying'])
     },
     computed: {
@@ -54,6 +54,9 @@ export default {
     },
     async created(){
         await this.LoadExposition(this.$route.params.detailId);
+    },
+    beforeDestroy(){
+        this.ResetExposition();
     }
 }
 </script>

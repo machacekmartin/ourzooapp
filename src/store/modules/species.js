@@ -39,6 +39,10 @@ const actions = {
         commit("setOneSpecies", oneSpecies);
     },
 
+    async ResetOneSpecies({ commit }){
+        commit("setOneSpecies", null);
+    },
+
     async ResetSpecies({ commit }){
         commit("setSpecies", null);
     },

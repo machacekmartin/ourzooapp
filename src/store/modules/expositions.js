@@ -39,6 +39,10 @@ const actions = {
         commit("setExposition", exposition);
     },
 
+    async ResetExposition({ commit }){
+        commit("setExposition", null);
+    },
+
     async ResetExpositions({ commit }){
         commit("setExpositions", null);
     },

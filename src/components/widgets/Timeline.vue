@@ -8,7 +8,7 @@
             </div>
             <div class="timeline__panel">
                 <h4 class="timeline__name">{{ item.name }}</h4>
-                <p class="timeline__text">
+                <p class="timeline__text" style="white-space: pre-line">
                     {{ item.description }}
                 </p>
                 <h3 class="timeline__toggle">. . .</h3>
