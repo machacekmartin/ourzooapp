@@ -80,6 +80,15 @@ const router = new VueRouter({
     routes,
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.name == 'Intro' && localStorage.getItem('introPassed')){
+        next({name: 'Home'})
+    }
+    else{
+        next()
+    }
+});
+
 
 
 export default router

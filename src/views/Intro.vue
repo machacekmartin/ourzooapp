@@ -60,10 +60,5 @@
                 this.$router.push('Home');
             },
         },
-        beforeCreate(){
-            if (localStorage.getItem('introPassed')){
-                this.$router.push('Home');
-            }
-        },
     }
 </script>
