@@ -30,6 +30,27 @@ export default {
     methods: {
         ...mapActions('location', ['UpdateLocation']),
         ...mapActions('menu', ['UpdateIsActive']),
+
+        permitLocationSetup(){
+            document.addEventListener('deviceready', (success) => {
+                navigator.geolocation.getCurrentPosition(succ => {
+                    this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude})
+
+                    navigator.geolocation.watchPosition(succ => {
+                        if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
+                            this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
+                        }
+                    }, err => {}, 
+                    { 
+                        enableHighAccuracy: true, maximumAge: 30000 
+                    });
+                    
+                }, err => {}, 
+                { 
+                    enableHighAccuracy: true 
+                })
+            })
+        }
     },
     computed: {
         ...mapGetters('location', ['location']),
@@ -37,24 +58,7 @@ export default {
         ...mapGetters('audio', ['target'])
     },
     created(){
-        document.addEventListener('deviceready', (success) => {
-            navigator.geolocation.getCurrentPosition(succ => {
-                this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude})
-
-                navigator.geolocation.watchPosition(succ => {
-                    if (succ.coords.latitude !== this.location.lat || succ.coords.longitude !== this.location.lng){
-                        this.UpdateLocation({lat: succ.coords.latitude, lng: succ.coords.longitude});
-                    }
-                }, err => {
-                alert(err.message);
-                }, { enableHighAccuracy: true, maximumAge: 30000 });
-                
-            }, err => {
-                alert(err.message);
-            }, { enableHighAccuracy: true })
-
-            
-        })
+        this.permitLocationSetup();
     }
 }
 </script>

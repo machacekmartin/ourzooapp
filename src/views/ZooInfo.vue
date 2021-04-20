@@ -9,13 +9,13 @@
             <div class="page__details page__details--rows">
                 <div class="page__detail">
                     <span class="page__detail__icon">
-                        <icon icon="species"></icon>
+                        <icon icon="phone"></icon>
                     </span>
                     <h4>Telefon: <span class="page__detail__small">{{ zoo.phone }}</span></h4> 
                 </div>
                 <div class="page__detail">
                     <span class="page__detail__icon">
-                        <icon icon="species"></icon>
+                        <icon icon="email"></icon>
                     </span>
                     <h4>Email: <a class="page__detail__small page__detail__link" :href="'mailto:'+zoo.email">{{ zoo.email }}</a></h4> 
                 </div>
@@ -27,13 +27,13 @@
                 </div>
                 <div class="page__detail">
                     <span class="page__detail__icon">
-                        <icon icon="species"></icon>
+                        <icon icon="internet"></icon>
                     </span>
                     <h4>Web: <a :href="zoo.url" target="__blank" class="page__detail__small page__detail__link" >{{ zoo.url }}</a></h4> 
                 </div>
                 <div class="page__detail">
                     <span class="page__detail__icon">
-                        <icon icon="species"></icon>
+                        <icon icon="events"></icon>
                     </span>
                     <h4>Otevírací doba: <span class="page__detail__small">{{ zoo.hours }}</span></h4> 
                 </div>

@@ -57,13 +57,11 @@
             },
             letsgo() {
                 localStorage.setItem('introPassed', true);
-                alert("Dám tě na homepage s přehledem všech zoo");
                 this.$router.push('Home');
             },
         },
         beforeCreate(){
             if (localStorage.getItem('introPassed')){
-                alert("Už tady byls");
                 this.$router.push('Home');
             }
         },
