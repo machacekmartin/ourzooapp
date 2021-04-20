@@ -4,7 +4,7 @@
         <div class="map">
             <l-map ref="map" :options="{ zoomControl: false}" :bounds="zoo.location && zoo.location.length > 1 ? zoo.location : maxBounds">
                 <l-tile-layer :url="tiles" :options="{ maxZoom: 20}"></l-tile-layer>
-                <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="true"></l-routing-machine>
+                <l-routing-machine @updateStats="updateStats" v-if="routerActive" :waypoints="waypoints" :router="router" :create-marker="() => {return null;}" :line-options="lineOptions" :fitSelectedRoutes="false"></l-routing-machine>
                 
                 <div v-for="item in currentFilterGroup" :key="item._id" v-if="item.location && item.location.length">
                     <template v-if="shouldBePolygon(item.location)">
@@ -36,7 +36,9 @@
             <div class="map__filters">
                 <custom-button class="map__button" :class="activeGroup == filter ? 'map__button--active' : ''" v-for="filter in filters" @clicked="switchFilter(filter)" :key="filter" :icon="filter"></custom-button>
             </div>
-            <custom-button class="map__locate" @clicked="focusOnUser()" icon="location"></custom-button>
+            <custom-button class="map__locate" @clicked="focusOnZoo()" icon="location"></custom-button>
+            <custom-button class="map__reset" @clicked="focusOnUser()" icon="target"></custom-button>
+
             <transition name="slide" mode="out-in">
                 <sliding-modal v-if="sliderActive" @close="deactivateSlider()" @show="redirect()" @navigate="activateNavigation(activeDetail.location)" :text="activeDetail.description" :title="activeDetail.name" :active="sliderActive" :image="activeDetail.image" :showPage="activeGroup == 'facilities' ? false : true"></sliding-modal>
             </transition>
@@ -228,6 +230,9 @@ export default {
         },
         focusOnUser(){
             this.$refs.map.mapObject.setView(this.location, 50);
+        },
+        focusOnZoo(){
+            this.$refs.map.mapObject.fitBounds(this.zoo.location);
         }
     },
     async mounted(){
