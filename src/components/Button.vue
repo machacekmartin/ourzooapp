@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="button" :class="[type ? 'button--' + type : '', mouseDown ? 'button--active' : '']" @click="emitClick()" @mouseover="mouseDown = true" @mouseout="mouseDown = false">
+    <button type="button" class="button" :class="[type ? 'button--' + type : '', touching ? 'button--active' : '']" @click="emitClick()">
         <span v-if="text">{{ text }}</span>
         <icon :icon="icon"></icon>
     </button>
@@ -9,13 +9,13 @@
         props: ['icon', 'type', 'text'],
         data(){
             return {
-                mouseDown: false
+                touching: false
             }
         },
         methods: {
-            emitClick(){
+            emitClick(event){
                 this.$emit('clicked');
-            }
+            },
         }
     };
 
