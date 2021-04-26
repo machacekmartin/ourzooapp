@@ -16,25 +16,25 @@
                         <span class="page__detail__icon">
                             <icon icon="species"></icon>
                         </span>
-                        <h4>{{ oneSpecies.type.name }}</h4>
+                        <h4>{{ oneSpecies.type.name ? oneSpecies.type.name : '---' }}</h4>
                     </div>
                     <div class="page__detail">
                         <span class="page__detail__icon">
                             <icon icon="life"></icon>
                         </span>
-                        <h4>{{ oneSpecies.life }}</h4>
+                        <h4>{{ oneSpecies.life ? oneSpecies.life : '---' }}</h4>
                     </div>
                     <div class="page__detail">
                         <span class="page__detail__icon">
                             <icon icon="exclamation"></icon>
                         </span>
-                        <h4>{{ oneSpecies.endangered }}</h4>
+                        <h4>{{ oneSpecies.endangered ? oneSpecies.endangered : '---' }}</h4>
                     </div>
                     <div class="page__detail">
                         <span class="page__detail__icon">
                             <icon icon="size"></icon>
                         </span>
-                        <h4>{{ oneSpecies.size }}</h4>
+                        <h4>{{ oneSpecies.size ? oneSpecies.size : '---' }}</h4>
                     </div>
                 </div>
                 <div class="page__buttons">
@@ -55,7 +55,7 @@
 
             <div class="page__info padding--t padding--h">
                 <h3>Informace o tomto druhu</h3>
-                <p>{{ oneSpecies.description }}</p>
+                <p>{{ oneSpecies.description ? oneSpecies.description : '---' }}</p>
             </div>
 
             <div class="padding--t padding--h padding--lg-b">

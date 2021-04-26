@@ -19,11 +19,11 @@
         <div class="page__body padding--h padding--lg-t">
             <h2 class="margin--t">{{ exposition.name }}</h2>
             <div class="padding--b">
-                <p>{{ exposition.description }}</p>
+                <p>{{ exposition.description ? exposition.description : '---' }}</p>
             </div>
         </div>
         <h3 class="padding--t padding--h">Galerie</h3>
-        <gallery-widget :items="exposition.gallery.images"></gallery-widget>´
+        <gallery-widget :items="exposition.gallery.images"></gallery-widget>
 
         <h3 class="padding--t padding--h">Zvířata v této epozici</h3>
         <list-widget class="padding--h padding--lg-b" :items="exposition.species" size="small" link="Zoo One Species"></list-widget>

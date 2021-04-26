@@ -17,7 +17,7 @@
         </transition>
         <div class="gallery__items">
             <div class="gallery__item" @click="openModal(index)" v-for="(image, index) in items">
-                <img  class="gallery__image" :src="'https://ourzoo.eu/assets/images/medium/'+ image" alt="image">
+                <img class="gallery__image" :src="'https://ourzoo.eu/assets/images/medium/'+ image" alt="image">
             </div>
         </div>
     </div>
