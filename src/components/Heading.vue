@@ -12,7 +12,7 @@
         </div>
         <div v-if="type === 'triple'" class="heading__triple">
             <custom-button @clicked="activateMenu()" class="heading__button" icon="menu"></custom-button>
-            <h1>{{ title }}</h1>
+            <h1 class="heading__title">{{ title }}</h1>
             <custom-button @clicked="$router.push('/home')" class="heading__button" icon="panels"></custom-button>
         </div>
     </div>

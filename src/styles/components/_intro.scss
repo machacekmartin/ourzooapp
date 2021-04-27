@@ -38,32 +38,24 @@
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         @include remove-scroll;
+    }
 
-        &:after{
-            content: '';
-            display: block;
-            min-width: 1px;
-            height: 1px;
-        }
+    &__block{
+        flex-basis: 100%;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        scroll-snap-align: start;
     }
 
     &__panel{
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex-basis: calc(100% - 2rem);
-        flex-shrink: 0;
-        margin: 0 1rem;
-        padding: 3rem 1rem;
+        padding: 2rem 1.5rem;
         border-radius: 1.75rem;
-        z-index: 1;
-        scroll-snap-align: start;
-        @include transition;
         @include glass;
         @include shadow;
     }
-
-
 
     &__image{
         width: 200px;
