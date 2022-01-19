@@ -1,2 +1,2 @@
-# Our Zoo Hybrid Mobile App
-Mobile app for Zoo visitors with data from [ourzooadmin](https://github.com/machacekmartin/ourzooadmin)
+# Our Zoo | Hybrid mobile app
+Mobile app for Zoo visitors with data from [ourzooadmin](https://github.com/machacekmartin/ourzooadmin).
